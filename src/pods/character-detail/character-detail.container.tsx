@@ -27,5 +27,5 @@ export const CharacterDetailContainer: React.FC = () => {
   React.useEffect(() => {
     getCharacter();
   });
-  return <CharacterDetailComponent />;
+  return <CharacterDetailComponent character={character} />;
 };
