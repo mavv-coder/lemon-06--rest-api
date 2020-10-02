@@ -22,14 +22,6 @@ export const CharacterCollectionContainer: React.FC = () => {
   }, []);
 
   return (
-    <>
-      <CharacterCollectionComponent />
-      <ul>
-        {characterCollection.length > 0 &&
-          characterCollection.map((character) => (
-            <li key={character.id}>{character.name}</li>
-          ))}
-      </ul>
-    </>
+    <CharacterCollectionComponent characterCollection={characterCollection} />
   );
 };
