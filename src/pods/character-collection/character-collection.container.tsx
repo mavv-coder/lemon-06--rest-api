@@ -11,7 +11,7 @@ export const CharacterCollectionContainer: React.FC = () => {
 
   const getCharacterCollection = async (): Promise<void> => {
     const resolve = await Axios.get(process.env.API_CHARACTERS_URL);
-    const newCollection = mapCharacterCollectionFromApiToVm(
+    const newCollection: CharacterVm[] = mapCharacterCollectionFromApiToVm(
       resolve.data.results
     );
     setCharacterCollection(newCollection);
