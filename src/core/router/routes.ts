@@ -1,28 +1,24 @@
 import { generatePath } from 'react-router';
 
 interface SwitchRoutes {
-  characterCollection: string;
   root: string;
-  hotelCollection: string;
-  createHotel: string;
-  editHotel: string;
+  characterCollection: string;
+  characterDetail: string;
 }
 
 export const switchRoutes: SwitchRoutes = {
   root: '/',
   characterCollection: '/characters',
-  hotelCollection: '/hotels',
-  createHotel: '/hotels/create',
-  editHotel: '/hotels/:id',
+  characterDetail: '/character/:id',
 };
 
 type NavigationFunction = (id: string) => string;
 
-interface LinkRoutes extends Omit<SwitchRoutes, 'editHotel'> {
-  editHotel: NavigationFunction;
+interface LinkRoutes extends Omit<SwitchRoutes, 'characterDetail'> {
+  characterDetail: NavigationFunction;
 }
 
 export const linkRoutes: LinkRoutes = {
   ...switchRoutes,
-  editHotel: (id) => generatePath(switchRoutes.editHotel, { id }),
+  characterDetail: (id) => generatePath(switchRoutes.characterDetail, { id }),
 };
