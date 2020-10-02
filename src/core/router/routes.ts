@@ -12,13 +12,13 @@ export const switchRoutes: SwitchRoutes = {
   characterDetail: '/character/:id',
 };
 
-type NavigationFunction = (id: string) => string;
+// type NavigationFunction = (id: string) => string;
 
-interface LinkRoutes extends Omit<SwitchRoutes, 'characterDetail'> {
-  characterDetail: NavigationFunction;
-}
+// interface LinkRoutes extends Omit<SwitchRoutes, 'characterDetail'> {
+//   characterDetail: NavigationFunction;
+// }
 
-export const linkRoutes: LinkRoutes = {
-  ...switchRoutes,
-  characterDetail: (id) => generatePath(switchRoutes.characterDetail, { id }),
-};
+// export const linkRoutes: LinkRoutes = {
+//   ...switchRoutes,
+//   characterDetail: (id) => generatePath(switchRoutes.characterDetail, { id }),
+// };
