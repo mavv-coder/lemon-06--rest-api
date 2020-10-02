@@ -1,6 +1,7 @@
 import { generatePath } from 'react-router';
 
 interface SwitchRoutes {
+  characterCollection: string;
   root: string;
   hotelCollection: string;
   createHotel: string;
@@ -9,6 +10,7 @@ interface SwitchRoutes {
 
 export const switchRoutes: SwitchRoutes = {
   root: '/',
+  characterCollection: '/characters',
   hotelCollection: '/hotels',
   createHotel: '/hotels/create',
   editHotel: '/hotels/:id',
