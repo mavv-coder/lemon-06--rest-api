@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { CharacterVm } from './character-collection.models';
 
 interface Props {
@@ -18,6 +19,7 @@ export const CharacterCollectionComponent: React.FC<Props> = (props) => {
               <p>{`Species: ${character.species}`}</p>
               <p>{`Origin: ${character.origin}`}</p>
               <img src={character.image} alt={character.name} />
+              <Link to={`character/${character.id}`}>Ver detalle</Link>
             </li>
           ))}
       </ul>

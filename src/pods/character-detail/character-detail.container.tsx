@@ -1,6 +1,6 @@
 import Axios from 'axios';
 import React from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { CharacterVm, createEmptyCharacter } from './character-detail.models';
 import { mapCharacterFromApiToVm } from './character-detail.mapper';
 import { CharacterDetailComponent } from './character-detail.component';
@@ -10,7 +10,6 @@ interface Params {
 }
 
 export const CharacterDetailContainer: React.FC = () => {
-  const history = useHistory();
   const params: Params = useParams();
   const [character, setCharacter] = React.useState<CharacterVm>(
     createEmptyCharacter()
@@ -26,6 +25,7 @@ export const CharacterDetailContainer: React.FC = () => {
 
   React.useEffect(() => {
     getCharacter();
-  });
+  }, []);
+
   return <CharacterDetailComponent character={character} />;
 };
