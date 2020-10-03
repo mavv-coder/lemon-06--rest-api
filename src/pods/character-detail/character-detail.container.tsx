@@ -21,11 +21,10 @@ export const CharacterDetailContainer: React.FC = () => {
   const [characterQuote, setCharacterQuote] = React.useState<string>('');
 
   const checkIfQuoteExist = async (): Promise<boolean> => {
-    const resolve: Quote[] = await Axios.get(process.env.API_CHARACTERS_URL);
+    const resolve = await Axios.get('api/quotes');
     return (
-      resolve.findIndex(() => {
-        resolve.filter((el) => el.id === parseInt(params.id));
-      }) !== -1
+      resolve.data.findIndex((el: Quote) => el.id === parseInt(params.id)) !==
+      -1
     );
   };
 
@@ -38,13 +37,12 @@ export const CharacterDetailContainer: React.FC = () => {
   };
 
   const getCharacterQuote = async (): Promise<void> => {
-    try {
+    const isQuote = await checkIfQuoteExist();
+    if (isQuote) {
       const resolve = await Axios.get(
         `${process.env.API_QUOTES_URL}${params.id}`
       );
       setCharacterQuote(resolve.data.quote);
-    } catch {
-      setCharacterQuote('');
     }
   };
 
@@ -63,7 +61,6 @@ export const CharacterDetailContainer: React.FC = () => {
   React.useEffect(() => {
     getCharacter();
     getCharacterQuote();
-    checkIfQuoteExist();
   }, []);
 
   return (
