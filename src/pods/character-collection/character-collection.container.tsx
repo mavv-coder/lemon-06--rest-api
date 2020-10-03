@@ -1,6 +1,6 @@
 import React from 'react';
 import Axios from 'axios';
-import { CharacterVm } from './character-collection.models';
+import { CharacterVm } from './character-collection.vm';
 import { mapCharacterCollectionFromApiToVm } from './character-collection.mapper';
 import { CharacterCollectionComponent } from './character-collection.component';
 

@@ -14,6 +14,7 @@
     "esModuleInterop": true,
     "baseUrl": "./src/",
     "paths": {
+      "models": ["models"],
       "common": ["common"],
       "core": ["core"],
       "layouts": ["layouts"],

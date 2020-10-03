@@ -17,10 +17,6 @@
       "quote": "What are you looking at?"
     },
     {
-      "id": 5,
-      "quote": "I'm going to get some beers, honey!"
-    },
-    {
       "id": 6,
       "quote": "Plrurrt tahhmmm mahhklll"
     },
@@ -73,12 +69,12 @@
       "quote": "I can read your mind using my antennas, so be careful!"
     },
     {
-      "id": 19,
-      "quote": ""
-    },
-    {
       "id": 20,
       "quote": "Do you like ants? I do"
+    },
+    {
+      "quote": "Esta es la nueva cita",
+      "id": 5
     }
   ]
 }

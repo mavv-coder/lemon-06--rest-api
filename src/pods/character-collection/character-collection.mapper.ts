@@ -1,4 +1,5 @@
-import { CharacterApi, CharacterVm } from './character-collection.models';
+import { CharacterApi } from 'models';
+import { CharacterVm } from './character-collection.vm';
 
 const mapCharacterFromApiToVm = (character: CharacterApi): CharacterVm => ({
   id: character.id,

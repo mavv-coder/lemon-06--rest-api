@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { CharacterVm } from './character-collection.models';
+import { CharacterVm } from './character-collection.vm';
 
 interface Props {
   characterCollection: CharacterVm[];

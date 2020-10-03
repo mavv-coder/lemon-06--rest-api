@@ -1,7 +1,7 @@
 import Axios from 'axios';
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { CharacterVm, createEmptyCharacter } from './character-detail.models';
+import { CharacterVm, createEmptyCharacter } from './character-detail.vm';
 import { mapCharacterFromApiToVm } from './character-detail.mapper';
 import { CharacterDetailComponent } from './character-detail.component';
 
@@ -14,6 +14,7 @@ export const CharacterDetailContainer: React.FC = () => {
   const [character, setCharacter] = React.useState<CharacterVm>(
     createEmptyCharacter()
   );
+  const [characterQuote, setCharacterQuote] = React.useState<string>('');
 
   const getCharacter = async (): Promise<void> => {
     const resolve = await Axios.get(
@@ -23,9 +24,40 @@ export const CharacterDetailContainer: React.FC = () => {
     setCharacter(newCharacter);
   };
 
+  const getCharacterQuote = async (): Promise<void> => {
+    try {
+      const resolve = await Axios.get(
+        `${process.env.API_QUOTES_URL}${params.id}`
+      );
+      setCharacterQuote(resolve.data.quote);
+    } catch {
+      setCharacterQuote('');
+    }
+  };
+
+  const handleUpdateQuote = async (id: number): Promise<boolean> => {
+    if (!characterQuote) {
+      Axios.post(process.env.API_QUOTES_URL, { id, quote: characterQuote });
+    } else {
+      Axios.put(`${process.env.API_QUOTES_URL}${id}`, {
+        quote: characterQuote,
+      });
+    }
+
+    return true;
+  };
+
   React.useEffect(() => {
     getCharacter();
+    getCharacterQuote();
   }, []);
 
-  return <CharacterDetailComponent character={character} />;
+  return (
+    <CharacterDetailComponent
+      character={character}
+      onUpdate={handleUpdateQuote}
+      setCharacterQuote={setCharacterQuote}
+      characterQuote={characterQuote}
+    />
+  );
 };
