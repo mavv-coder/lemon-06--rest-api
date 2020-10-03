@@ -1,7 +1,11 @@
 import Axios from 'axios';
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { CharacterVm, createEmptyCharacter } from './character-detail.vm';
+import {
+  CharacterVm,
+  createEmptyCharacter,
+  Quote,
+} from './character-detail.vm';
 import { mapCharacterFromApiToVm } from './character-detail.mapper';
 import { CharacterDetailComponent } from './character-detail.component';
 
@@ -15,6 +19,15 @@ export const CharacterDetailContainer: React.FC = () => {
     createEmptyCharacter()
   );
   const [characterQuote, setCharacterQuote] = React.useState<string>('');
+
+  const checkIfQuoteExist = async (): Promise<boolean> => {
+    const resolve: Quote[] = await Axios.get(process.env.API_CHARACTERS_URL);
+    return (
+      resolve.findIndex(() => {
+        resolve.filter((el) => el.id === parseInt(params.id));
+      }) !== -1
+    );
+  };
 
   const getCharacter = async (): Promise<void> => {
     const resolve = await Axios.get(
@@ -50,6 +63,7 @@ export const CharacterDetailContainer: React.FC = () => {
   React.useEffect(() => {
     getCharacter();
     getCharacterQuote();
+    checkIfQuoteExist();
   }, []);
 
   return (
