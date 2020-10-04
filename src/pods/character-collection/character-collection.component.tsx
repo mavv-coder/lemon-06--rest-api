@@ -8,6 +8,7 @@ interface Props {
 
 export const CharacterCollectionComponent: React.FC<Props> = (props) => {
   const { characterCollection } = props;
+
   return (
     <>
       <ul>
