@@ -1,10 +1,6 @@
 {
   "quotes": [
     {
-      "id": 1,
-      "quote": "Sometimes science is more art than science"
-    },
-    {
       "id": 2,
       "quote": ""
     },
@@ -71,6 +67,10 @@
     {
       "id": 20,
       "quote": "Do you like ants? I do"
+    },
+    {
+      "quote": "ererererer",
+      "id": 1
     }
   ]
 }

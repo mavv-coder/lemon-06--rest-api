@@ -19,6 +19,7 @@ export const CharacterDetailContainer: React.FC = () => {
     createEmptyCharacter()
   );
   const [characterQuote, setCharacterQuote] = React.useState<string>('');
+  const [updatedQuote, setUpdatedQuote] = React.useState<string>('');
 
   const checkIfQuoteExist = async (): Promise<boolean> => {
     const resolve = await Axios.get('api/quotes');
@@ -48,13 +49,13 @@ export const CharacterDetailContainer: React.FC = () => {
 
   const handleUpdateQuote = async (id: number): Promise<boolean> => {
     if (!characterQuote) {
-      Axios.post(process.env.API_QUOTES_URL, { id, quote: characterQuote });
+      Axios.post(process.env.API_QUOTES_URL, { id, quote: updatedQuote });
     } else {
       Axios.put(`${process.env.API_QUOTES_URL}${id}`, {
-        quote: characterQuote,
+        quote: updatedQuote,
       });
     }
-
+    setCharacterQuote(updatedQuote);
     return true;
   };
 
@@ -67,8 +68,9 @@ export const CharacterDetailContainer: React.FC = () => {
     <CharacterDetailComponent
       character={character}
       onUpdate={handleUpdateQuote}
-      setCharacterQuote={setCharacterQuote}
       characterQuote={characterQuote}
+      setUpdatedQuote={setUpdatedQuote}
+      updatedQuote={updatedQuote}
     />
   );
 };

@@ -11,7 +11,9 @@ export const EpisodeCollectionContainer: React.FC = () => {
 
   const getEpisodeCollection = async (): Promise<void> => {
     const resolve = await Axios.get(process.env.API_EPISODES_URL);
-    const newCollection = mapEpisodeCollectionFromApiToVm(resolve.data.results);
+    const newCollection: EpisodeVm[] = mapEpisodeCollectionFromApiToVm(
+      resolve.data.results
+    );
     setEpisodeCollection(newCollection);
   };
 
