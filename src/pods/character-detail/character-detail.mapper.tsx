@@ -1,4 +1,4 @@
-import { CharacterApi } from 'models';
+import { CharacterApi } from 'common/models';
 import { CharacterVm } from './character-detail.vm';
 
 export const mapCharacterFromApiToVm = (

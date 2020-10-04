@@ -1,16 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { CharacterVm } from './character-collection.vm';
+import { SearchFilterComponent } from '../../common/components/search-filter.component';
 
 interface Props {
   characterCollection: CharacterVm[];
+  handleOnSearch: (search: string) => Promise<void>;
 }
 
 export const CharacterCollectionComponent: React.FC<Props> = (props) => {
-  const { characterCollection } = props;
+  const { characterCollection, handleOnSearch } = props;
 
   return (
     <>
+      <SearchFilterComponent handleOnSearch={handleOnSearch} />
       <ul>
         {characterCollection.length > 0 &&
           characterCollection.map((character) => (

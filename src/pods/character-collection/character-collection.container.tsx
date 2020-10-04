@@ -17,11 +17,24 @@ export const CharacterCollectionContainer: React.FC = () => {
     setCharacterCollection(newCollection);
   };
 
+  const handleOnSearch = async (search: string): Promise<void> => {
+    const resolve = await Axios.get(
+      `${process.env.API_CHARACTERS_URL}?name=${search}`
+    );
+    const newCollection: CharacterVm[] = mapCharacterCollectionFromApiToVm(
+      resolve.data.results
+    );
+    setCharacterCollection(newCollection);
+  };
+
   React.useEffect(() => {
     getCharacterCollection();
   }, []);
 
   return (
-    <CharacterCollectionComponent characterCollection={characterCollection} />
+    <CharacterCollectionComponent
+      characterCollection={characterCollection}
+      handleOnSearch={handleOnSearch}
+    />
   );
 };

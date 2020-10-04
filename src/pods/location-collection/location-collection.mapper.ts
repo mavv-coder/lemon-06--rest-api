@@ -1,4 +1,4 @@
-import { LocationApi } from 'models';
+import { LocationApi } from 'common/models';
 import { LocationVm } from './location-collection.vm';
 
 const mapLocationFromApiToVm = (location: LocationApi): LocationVm => ({
