@@ -17,9 +17,28 @@ export const EpisodeCollectionContainer: React.FC = () => {
     setEpisodeCollection(newCollection);
   };
 
+  const handleOnSearch = async (search: string): Promise<void> => {
+    try {
+      const resolve = await Axios.get(
+        `${process.env.API_EPISODES_URL}?name=${search}`
+      );
+      const newCollection: EpisodeVm[] = mapEpisodeCollectionFromApiToVm(
+        resolve.data.results
+      );
+      setEpisodeCollection(newCollection);
+    } catch {
+      setEpisodeCollection([]);
+    }
+  };
+
   React.useEffect(() => {
     getEpisodeCollection();
   }, []);
 
-  return <EpisodeCollectionComponente episodeCollection={episodeCollection} />;
+  return (
+    <EpisodeCollectionComponente
+      episodeCollection={episodeCollection}
+      handleOnSearch={handleOnSearch}
+    />
+  );
 };

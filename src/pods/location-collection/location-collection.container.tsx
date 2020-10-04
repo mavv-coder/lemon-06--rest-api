@@ -17,11 +17,28 @@ export const LocationCollectionContainer: React.FC = () => {
     setLocationCollection(newCollection);
   };
 
+  const handleOnSearch = async (search: string): Promise<void> => {
+    try {
+      const resolve = await Axios.get(
+        `${process.env.API_LOCATIONS_URL}?name=${search}`
+      );
+      const newCollection: LocationVm[] = mapLocationCollectionFromApiToVm(
+        resolve.data.results
+      );
+      setLocationCollection(newCollection);
+    } catch {
+      setLocationCollection([]);
+    }
+  };
+
   React.useEffect(() => {
     getLocationCollection();
   }, []);
 
   return (
-    <LocationCollectionComponent locationCollection={locationCollection} />
+    <LocationCollectionComponent
+      locationCollection={locationCollection}
+      handleOnSearch={handleOnSearch}
+    />
   );
 };

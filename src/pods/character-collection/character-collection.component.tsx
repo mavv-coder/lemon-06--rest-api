@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { CharacterVm } from './character-collection.vm';
-import { SearchFilterComponent } from '../../common/components/search-filter.component';
+import { SearchFilterComponent } from 'common/components/search-filter.component';
 
 interface Props {
   characterCollection: CharacterVm[];
@@ -13,8 +13,14 @@ export const CharacterCollectionComponent: React.FC<Props> = (props) => {
 
   return (
     <>
-      <SearchFilterComponent handleOnSearch={handleOnSearch} />
+      <SearchFilterComponent
+        handleOnSearch={handleOnSearch}
+        placeholder="Search character name"
+      />
       <ul>
+        {!characterCollection.length && (
+          <p>No results were found for your search</p>
+        )}
         {characterCollection.length > 0 &&
           characterCollection.map((character) => (
             <li key={character.id}>
