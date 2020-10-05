@@ -17,9 +17,9 @@ export const iconBtn = css`
   height: 3rem;
   width: 3rem;
   position: relative;
-  background-color: #44cfb7;
+  background-color: #009a84;
   &:hover {
-    background-color: #39a895;
+    background-color: #006553;
   }
   &:first-of-type {
   }

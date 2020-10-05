@@ -4,6 +4,10 @@ export const content = css`
   margin: 2rem;
 `;
 
+export const appBar = css`
+  background-color: #be7024;
+`;
+
 export const flexContainer = css`
   display: flex;
   align-items: center;

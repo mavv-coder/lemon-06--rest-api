@@ -9,12 +9,13 @@ interface Props {
 }
 export const DisplayCollectionComponent: React.FC<Props> = (props) => {
   const { displayCollection, setDisplayCollection, nameCollection } = props;
-  const { btnContainer } = classes;
+  const { btnContainer, showBtn, hideBtn } = classes;
 
   return (
     <div className={btnContainer}>
       {displayCollection && (
         <Button
+          className={hideBtn}
           variant="contained"
           color="secondary"
           onClick={() => setDisplayCollection(false)}
@@ -24,6 +25,7 @@ export const DisplayCollectionComponent: React.FC<Props> = (props) => {
       )}
       {!displayCollection && (
         <Button
+          className={showBtn}
           variant="contained"
           color="primary"
           onClick={() => setDisplayCollection(true)}

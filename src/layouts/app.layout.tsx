@@ -6,11 +6,11 @@ import * as classes from './app.layout.styles';
 
 export const AppLayout: React.FunctionComponent = (props) => {
   const { children } = props;
-  const { appbarTitle, flexContainer, content } = classes;
+  const { appBar, appbarTitle, flexContainer, content } = classes;
 
   return (
     <>
-      <AppBar position="static">
+      <AppBar position="static" className={appBar}>
         <Toolbar variant="dense">
           <div className={flexContainer}>
             <ChildCareOutlinedIcon />
