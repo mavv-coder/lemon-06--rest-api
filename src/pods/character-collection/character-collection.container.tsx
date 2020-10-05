@@ -3,56 +3,69 @@ import Axios from 'axios';
 import { CharacterVm } from './character-collection.vm';
 import { mapCharacterCollectionFromApiToVm } from './character-collection.mapper';
 import { CharacterCollectionComponent } from './character-collection.component';
+import { useDataCollection } from 'common/hooks';
 
 export const CharacterCollectionContainer: React.FC = () => {
-  const [currentPage, setCurrentPage] = React.useState<number>(1);
-  const [lastPage, setLastPage] = React.useState<number>(0);
-  const [characterCollection, setCharacterCollection] = React.useState<
-    CharacterVm[]
-  >([]);
-  const [isSearching, setIsSearching] = React.useState<boolean>(false);
-  const currentPageRef = React.useRef(currentPage);
+  const {
+    getDataCollection,
+    searchDataCollection,
+    currentPage,
+    setCurrentPage,
+    lastPage,
+    dataCollection,
+    currentPageRef,
+  } = useDataCollection(
+    mapCharacterCollectionFromApiToVm,
+    process.env.API_CHARACTERS_URL
+  );
+  //
 
-  const getCharacterCollection = async (): Promise<void> => {
-    const resolve = await Axios.get(
-      `${process.env.API_CHARACTERS_URL}?page=${currentPageRef.current}`
-    );
-    const newCollection: CharacterVm[] = mapCharacterCollectionFromApiToVm(
-      resolve.data.results
-    );
-    setLastPage(resolve.data.info.pages);
-    setCharacterCollection(newCollection);
-  };
+  // const [currentPage, setCurrentPage] = React.useState<number>(1);
+  // const [lastPage, setLastPage] = React.useState<number>(0);
+  // const [characterCollection, setCharacterCollection] = React.useState<
+  //   CharacterVm[]
+  // >([]);
+  // const currentPageRef = React.useRef(currentPage);
 
-  const handleOnSearch = async (search: string): Promise<void> => {
-    try {
-      const resolve = await Axios.get(
-        `${process.env.API_CHARACTERS_URL}?name=${search}`
-      );
-      const newCollection: CharacterVm[] = mapCharacterCollectionFromApiToVm(
-        resolve.data.results
-      );
-      setCharacterCollection(newCollection);
-    } catch {
-      setCharacterCollection([]);
-    }
-  };
+  // const getCharacterCollection = async (): Promise<void> => {
+  //   const resolve = await Axios.get(
+  //     `${process.env.API_CHARACTERS_URL}?page=${currentPageRef.current}`
+  //   );
+  //   const newCollection: CharacterVm[] = mapCharacterCollectionFromApiToVm(
+  //     resolve.data.results
+  //   );
+  //   setLastPage(resolve.data.info.pages);
+  //   setCharacterCollection(newCollection);
+  // };
+
+  // const searchDataCollection = async (search: string): Promise<void> => {
+  //   try {
+  //     const resolve = await Axios.get(
+  //       `${process.env.API_CHARACTERS_URL}?name=${search}`
+  //     );
+  //     const newCollection: CharacterVm[] = mapCharacterCollectionFromApiToVm(
+  //       resolve.data.results
+  //     );
+  //     setDataCollection(newCollection);
+  //   } catch {
+  //     setDataCollection([]);
+  //   }
+  // };
 
   React.useEffect(() => {
-    getCharacterCollection();
+    getDataCollection();
+    // getCharacterCollection();
   }, []);
 
   return (
     <CharacterCollectionComponent
-      characterCollection={characterCollection}
-      handleOnSearch={handleOnSearch}
+      characterCollection={dataCollection as CharacterVm[]}
+      handleOnSearch={searchDataCollection}
       currentPage={currentPage}
       setCurrentPage={setCurrentPage}
       lastPage={lastPage}
-      getCharacterCollection={getCharacterCollection}
+      getCharacterCollection={getDataCollection}
       currentPageRef={currentPageRef}
-      isSearching={isSearching}
-      setIsSearching={setIsSearching}
     />
   );
 };

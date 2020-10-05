@@ -13,11 +13,11 @@ interface Props {
   lastPage: number;
   getCharacterCollection: () => Promise<void>;
   currentPageRef: React.MutableRefObject<number>;
-  isSearching: boolean;
-  setIsSearching: (value: boolean) => void;
 }
 
 export const CharacterCollectionComponent: React.FC<Props> = (props) => {
+  const [isSearching, setIsSearching] = React.useState<boolean>(false);
+
   const {
     characterCollection,
     handleOnSearch,
@@ -26,8 +26,6 @@ export const CharacterCollectionComponent: React.FC<Props> = (props) => {
     lastPage,
     getCharacterCollection,
     currentPageRef,
-    isSearching,
-    setIsSearching,
   } = props;
 
   return (
