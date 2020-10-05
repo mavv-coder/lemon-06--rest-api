@@ -1,4 +1,6 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
+import * as classes from './display-collection.styles';
 
 interface Props {
   displayCollection: boolean;
@@ -7,19 +9,28 @@ interface Props {
 }
 export const DisplayCollectionComponent: React.FC<Props> = (props) => {
   const { displayCollection, setDisplayCollection, nameCollection } = props;
+  const { btnContainer } = classes;
 
   return (
-    <>
+    <div className={btnContainer}>
       {displayCollection && (
-        <button onClick={() => setDisplayCollection(false)}>
-          HIDE {nameCollection}
-        </button>
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={() => setDisplayCollection(false)}
+        >
+          hide {nameCollection}
+        </Button>
       )}
       {!displayCollection && (
-        <button onClick={() => setDisplayCollection(true)}>
-          GET {nameCollection}
-        </button>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => setDisplayCollection(true)}
+        >
+          show {nameCollection}
+        </Button>
       )}
-    </>
+    </div>
   );
 };
