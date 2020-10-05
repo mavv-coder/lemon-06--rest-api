@@ -17,7 +17,6 @@ interface Props {
 
 export const CharacterCollectionComponent: React.FC<Props> = (props) => {
   const [isSearching, setIsSearching] = React.useState<boolean>(false);
-
   const {
     characterCollection,
     handleOnSearch,

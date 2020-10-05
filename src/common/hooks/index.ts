@@ -1,1 +1,1 @@
-export * from './get-collection.hook';
+export * from './data-collection.hook';
