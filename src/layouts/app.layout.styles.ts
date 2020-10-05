@@ -5,7 +5,7 @@ export const content = css`
 `;
 
 export const appBar = css`
-  background-color: #be7024;
+  background-color: #455073;
 `;
 
 export const flexContainer = css`
