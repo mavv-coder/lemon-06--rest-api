@@ -6,7 +6,6 @@ const mapCharacterFromApiToVm = (character: CharacterApi): CharacterVm => ({
   name: character.name,
   image: character.image,
   species: character.species,
-  origin: character.origin.name,
 });
 
 export const mapCharacterCollectionFromApiToVm = (

@@ -3,5 +3,4 @@ export interface CharacterVm {
   name: string;
   image: string;
   species: string;
-  origin: string;
 }
