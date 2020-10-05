@@ -23,6 +23,8 @@ interface Props {
   lastPage: number;
   getCharacterCollection: () => Promise<void>;
   currentPageRef: React.MutableRefObject<number>;
+  isSearching: boolean;
+  setIsSearching: (value: boolean) => void;
 }
 
 export const CharacterCollectionComponent: React.FC<Props> = (props) => {
@@ -34,6 +36,8 @@ export const CharacterCollectionComponent: React.FC<Props> = (props) => {
     lastPage,
     getCharacterCollection,
     currentPageRef,
+    isSearching,
+    setIsSearching,
   } = props;
   const { characterList, listItem, detailLink, detailIcon } = classes;
 
@@ -41,6 +45,7 @@ export const CharacterCollectionComponent: React.FC<Props> = (props) => {
     <>
       <SearchFilterComponent
         handleOnSearch={handleOnSearch}
+        setIsSearching={setIsSearching}
         placeholder="Search character name"
       />
       {!characterCollection.length && <NoResultsComponent />}
@@ -65,7 +70,7 @@ export const CharacterCollectionComponent: React.FC<Props> = (props) => {
             ))}
         </List>
       )}
-      {characterCollection.length > 0 && (
+      {characterCollection.length > 0 && !isSearching && (
         <PaginationComponent
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}

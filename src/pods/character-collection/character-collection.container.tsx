@@ -10,6 +10,7 @@ export const CharacterCollectionContainer: React.FC = () => {
   const [characterCollection, setCharacterCollection] = React.useState<
     CharacterVm[]
   >([]);
+  const [isSearching, setIsSearching] = React.useState<boolean>(false);
   const currentPageRef = React.useRef(currentPage);
 
   const getCharacterCollection = async (): Promise<void> => {
@@ -50,6 +51,8 @@ export const CharacterCollectionContainer: React.FC = () => {
       lastPage={lastPage}
       getCharacterCollection={getCharacterCollection}
       currentPageRef={currentPageRef}
+      isSearching={isSearching}
+      setIsSearching={setIsSearching}
     />
   );
 };
