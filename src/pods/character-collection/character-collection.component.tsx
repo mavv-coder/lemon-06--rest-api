@@ -1,19 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { CharacterVm } from './character-collection.vm';
 import { SearchFilterComponent } from 'common/components/search-filter/search-filter.component';
 import { PaginationComponent } from 'common/components/pagination/pagination.component';
 import { NoResultsComponent } from 'common/components/no-results/no-results.component';
-import * as classes from './character-collection.styles';
-
-// Material UI
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import ListItemText from '@material-ui/core/ListItemText';
-import Avatar from '@material-ui/core/Avatar';
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import { CharacterListComponent } from './components/character-list.component';
 
 interface Props {
   characterCollection: CharacterVm[];
@@ -39,7 +29,6 @@ export const CharacterCollectionComponent: React.FC<Props> = (props) => {
     isSearching,
     setIsSearching,
   } = props;
-  const { characterList, listItem, detailLink, detailIcon } = classes;
 
   return (
     <>
@@ -50,25 +39,7 @@ export const CharacterCollectionComponent: React.FC<Props> = (props) => {
       />
       {!characterCollection.length && <NoResultsComponent />}
       {characterCollection.length > 0 && (
-        <List className={characterList}>
-          {characterCollection.length > 0 &&
-            characterCollection.map((character) => (
-              <ListItem key={character.id} className={listItem}>
-                <ListItemAvatar>
-                  <Avatar src={character.image} alt={character.name} />
-                </ListItemAvatar>
-                <ListItemText
-                  primary={character.name}
-                  secondary={character.species}
-                />
-                <ListItemSecondaryAction>
-                  <Link className={detailLink} to={`character/${character.id}`}>
-                    <ArrowForwardIcon className={detailIcon} />
-                  </Link>
-                </ListItemSecondaryAction>
-              </ListItem>
-            ))}
-        </List>
+        <CharacterListComponent characterCollection={characterCollection} />
       )}
       {characterCollection.length > 0 && !isSearching && (
         <PaginationComponent
