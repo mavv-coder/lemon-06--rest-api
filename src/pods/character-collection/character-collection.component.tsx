@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { CharacterVm } from './character-collection.vm';
 import { SearchFilterComponent } from 'common/components/search-filter/search-filter.component';
+import * as classes from './character-collection.styles';
 
 // Material UI
 import List from '@material-ui/core/List';
@@ -20,6 +21,7 @@ interface Props {
 
 export const CharacterCollectionComponent: React.FC<Props> = (props) => {
   const { characterCollection, handleOnSearch } = props;
+  const { characterList, listItem, detailLink, detailIcon } = classes;
 
   return (
     <>
@@ -30,10 +32,10 @@ export const CharacterCollectionComponent: React.FC<Props> = (props) => {
       {!characterCollection.length && (
         <p>No results were found for your search</p>
       )}
-      <List>
+      <List className={characterList}>
         {characterCollection.length > 0 &&
           characterCollection.map((character) => (
-            <ListItem key={character.id}>
+            <ListItem key={character.id} className={listItem}>
               <ListItemAvatar>
                 <Avatar src={character.image} alt={character.name} />
               </ListItemAvatar>
@@ -42,8 +44,8 @@ export const CharacterCollectionComponent: React.FC<Props> = (props) => {
                 secondary={character.species}
               />
               <ListItemSecondaryAction>
-                <Link to={`character/${character.id}`}>
-                  <ArrowForwardIcon />
+                <Link className={detailLink} to={`character/${character.id}`}>
+                  <ArrowForwardIcon className={detailIcon} />
                 </Link>
               </ListItemSecondaryAction>
             </ListItem>

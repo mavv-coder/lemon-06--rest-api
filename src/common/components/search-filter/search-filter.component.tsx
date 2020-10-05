@@ -1,7 +1,6 @@
 import React from 'react';
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
-import Divider from '@material-ui/core/Divider';
 import * as classes from './search-filter.styles';
 
 interface Props {
@@ -22,7 +21,6 @@ export const SearchFilterComponent: React.FC<Props> = (props) => {
         onChange={(e) => handleOnSearch(e.target.value)}
       />
       <SearchIcon className={searchIcon} />
-      <Divider light />
     </div>
   );
 };
