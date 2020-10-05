@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { CharacterVm } from './character-collection.vm';
-import { SearchFilterComponent } from 'common/components/search-filter.component';
+import { SearchFilterComponent } from 'common/components/search-filter/search-filter.component';
 
 // Material UI
 import List from '@material-ui/core/List';

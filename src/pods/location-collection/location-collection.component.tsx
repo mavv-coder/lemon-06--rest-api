@@ -1,5 +1,5 @@
 import React from 'react';
-import { SearchFilterComponent } from 'common/components/search-filter.component';
+import { SearchFilterComponent } from 'common/components/search-filter/search-filter.component';
 import { LocationVm } from './location-collection.vm';
 
 interface Props {
