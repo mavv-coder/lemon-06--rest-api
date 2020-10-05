@@ -22,7 +22,7 @@ export const SearchFilterComponent: React.FC<Props> = (props) => {
         onChange={(e) => handleOnSearch(e.target.value)}
       />
       <SearchIcon className={searchIcon} />
-      <Divider />
+      <Divider light />
     </div>
   );
 };
