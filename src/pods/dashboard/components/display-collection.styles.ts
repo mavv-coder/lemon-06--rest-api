@@ -1,7 +1,8 @@
 import { css } from 'emotion';
 
 export const btnContainer = css`
+  width: 100%;
   display: flex;
   justify-content: center;
-  width: 100%;
+  margin-bottom: 2rem;
 `;

@@ -13,33 +13,45 @@ export const DashboardComponent: React.FC = () => {
     false
   );
   const [displayEpisodes, setdisplayEpisodes] = React.useState<boolean>(false);
-  const { flexContainer, collectionContainer } = classes;
+  const { flexContainer, btnContainer, collectionContainer } = classes;
 
   return (
     <div className={flexContainer}>
-      <div className={collectionContainer}>
+      <div className={btnContainer}>
         <DisplayCollectionComponent
           displayCollection={displayCharacters}
           setDisplayCollection={setdisplayCharacters}
           nameCollection="Characters"
         />
-        {displayCharacters && <CharacterCollectionContainer />}
+        {displayCharacters && (
+          <div className={collectionContainer}>
+            <CharacterCollectionContainer />
+          </div>
+        )}
       </div>
-      <div className={collectionContainer}>
+      <div className={btnContainer}>
         <DisplayCollectionComponent
           displayCollection={displayLocations}
           setDisplayCollection={setdisplayLocations}
           nameCollection="Locations"
         />
-        {displayLocations && <LocationCollectionContainer />}
+        {displayLocations && (
+          <div className={collectionContainer}>
+            <LocationCollectionContainer />
+          </div>
+        )}
       </div>
-      <div className={collectionContainer}>
+      <div className={btnContainer}>
         <DisplayCollectionComponent
           displayCollection={displayEpisodes}
           setDisplayCollection={setdisplayEpisodes}
           nameCollection="Episodes"
         />
-        {displayEpisodes && <EpisodeCollectionContainer />}
+        {displayEpisodes && (
+          <div className={collectionContainer}>
+            <EpisodeCollectionContainer />
+          </div>
+        )}
       </div>
     </div>
   );

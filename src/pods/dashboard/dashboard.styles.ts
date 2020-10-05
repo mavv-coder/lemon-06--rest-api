@@ -6,12 +6,16 @@ export const flexContainer = css`
   width: 100%;
 `;
 
-export const collectionContainer = css`
+export const btnContainer = css`
   flex: 1;
   margin-right: 2rem;
-  padding: 1rem;
-  background-color: #eee;
+
   &:last-of-type {
     margin-right: 0;
   }
+`;
+
+export const collectionContainer = css`
+  padding: 1rem;
+  background-color: #eee;
 `;
