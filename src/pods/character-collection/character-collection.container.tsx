@@ -5,7 +5,7 @@ import { mapCharacterCollectionFromApiToVm } from './character-collection.mapper
 import { CharacterCollectionComponent } from './character-collection.component';
 
 export const CharacterCollectionContainer: React.FC = () => {
-  const [currentPage, setCurrentPage] = React.useState<number>(3);
+  const [currentPage, setCurrentPage] = React.useState<number>(1);
   const [lastPage, setLastPage] = React.useState<number>(0);
   const [characterCollection, setCharacterCollection] = React.useState<
     CharacterVm[]
