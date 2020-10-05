@@ -22,6 +22,7 @@ interface Props {
   setCurrentPage: (page: number) => void;
   lastPage: number;
   getCharacterCollection: () => Promise<void>;
+  currentPageRef: React.MutableRefObject<number>;
 }
 
 export const CharacterCollectionComponent: React.FC<Props> = (props) => {
@@ -32,6 +33,7 @@ export const CharacterCollectionComponent: React.FC<Props> = (props) => {
     currentPage,
     lastPage,
     getCharacterCollection,
+    currentPageRef,
   } = props;
   const { characterList, listItem, detailLink, detailIcon } = classes;
 
@@ -68,6 +70,7 @@ export const CharacterCollectionComponent: React.FC<Props> = (props) => {
         setCurrentPage={setCurrentPage}
         lastPage={lastPage}
         getCollection={getCharacterCollection}
+        currentPageRef={currentPageRef}
       />
       {/* <ul>
         {!characterCollection.length && (

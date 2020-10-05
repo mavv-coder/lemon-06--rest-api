@@ -10,16 +10,27 @@ interface Props {
   setCurrentPage: (page: number) => void;
   lastPage: number;
   getCollection: () => Promise<void>;
+  currentPageRef: React.MutableRefObject<number>;
 }
 
 export const PaginationComponent: React.FC<Props> = (props) => {
-  const { currentPage, setCurrentPage, lastPage, getCollection } = props;
+  const {
+    currentPage,
+    setCurrentPage,
+    lastPage,
+    getCollection,
+    currentPageRef,
+  } = props;
   const { flexContainer, Pagtext, iconBtn, prevIcon, nextIcon } = classes;
 
   const handlePagination = (action: string): void => {
-    action === 'prev'
-      ? setCurrentPage(currentPage - 1)
-      : setCurrentPage(currentPage + 1);
+    if (action === 'prev') {
+      setCurrentPage(currentPage - 1);
+      currentPageRef.current = currentPage - 1;
+    } else {
+      setCurrentPage(currentPage + 1);
+      currentPageRef.current = currentPage + 1;
+    }
     getCollection();
   };
 
