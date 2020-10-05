@@ -1,13 +1,13 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import * as classes from './display-collection.styles';
+import * as classes from './display-collection-button.styles';
 
 interface Props {
   displayCollection: boolean;
   setDisplayCollection: (v: boolean) => void;
   nameCollection: string;
 }
-export const DisplayCollectionComponent: React.FC<Props> = (props) => {
+export const DisplayCollectionButtonComponent: React.FC<Props> = (props) => {
   const { displayCollection, setDisplayCollection, nameCollection } = props;
   const { btnContainer, showBtn, hideBtn } = classes;
 

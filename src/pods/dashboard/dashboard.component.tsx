@@ -1,5 +1,5 @@
 import React from 'react';
-import { DisplayCollectionComponent } from './components/display-collection.component';
+import { DisplayCollectionButtonComponent } from './components/display-collection-button.component';
 import { CharacterCollectionContainer } from '../character-collection';
 import { LocationCollectionContainer } from '../location-collection';
 import { EpisodeCollectionContainer } from '../episode-collection';
@@ -18,7 +18,7 @@ export const DashboardComponent: React.FC = () => {
   return (
     <div className={flexContainer}>
       <div className={btnContainer}>
-        <DisplayCollectionComponent
+        <DisplayCollectionButtonComponent
           displayCollection={displayCharacters}
           setDisplayCollection={setdisplayCharacters}
           nameCollection="Characters"
@@ -30,7 +30,7 @@ export const DashboardComponent: React.FC = () => {
         )}
       </div>
       <div className={btnContainer}>
-        <DisplayCollectionComponent
+        <DisplayCollectionButtonComponent
           displayCollection={displayLocations}
           setDisplayCollection={setdisplayLocations}
           nameCollection="Locations"
@@ -42,7 +42,7 @@ export const DashboardComponent: React.FC = () => {
         )}
       </div>
       <div className={btnContainer}>
-        <DisplayCollectionComponent
+        <DisplayCollectionButtonComponent
           displayCollection={displayEpisodes}
           setDisplayCollection={setdisplayEpisodes}
           nameCollection="Episodes"
