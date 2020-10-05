@@ -5,15 +5,20 @@ import { mapCharacterCollectionFromApiToVm } from './character-collection.mapper
 import { CharacterCollectionComponent } from './character-collection.component';
 
 export const CharacterCollectionContainer: React.FC = () => {
+  const [currentPage, setCurrentPage] = React.useState<number>(3);
+  const [lastPage, setLastPage] = React.useState<number>(0);
   const [characterCollection, setCharacterCollection] = React.useState<
     CharacterVm[]
   >([]);
 
   const getCharacterCollection = async (): Promise<void> => {
-    const resolve = await Axios.get(process.env.API_CHARACTERS_URL);
+    const resolve = await Axios.get(
+      `${process.env.API_CHARACTERS_URL}?page=${currentPage}`
+    );
     const newCollection: CharacterVm[] = mapCharacterCollectionFromApiToVm(
       resolve.data.results
     );
+    setLastPage(resolve.data.info.pages);
     setCharacterCollection(newCollection);
   };
 
@@ -39,6 +44,9 @@ export const CharacterCollectionContainer: React.FC = () => {
     <CharacterCollectionComponent
       characterCollection={characterCollection}
       handleOnSearch={handleOnSearch}
+      currentPage={currentPage}
+      setCurrentPage={setCurrentPage}
+      lastPage={lastPage}
     />
   );
 };

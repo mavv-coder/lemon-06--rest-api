@@ -1,7 +1,7 @@
 import { css } from 'emotion';
 
 export const content = css`
-  margin: 2rem 2rem 0 2rem;
+  margin: 2rem;
 `;
 
 export const flexContainer = css`

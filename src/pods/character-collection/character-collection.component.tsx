@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { CharacterVm } from './character-collection.vm';
 import { SearchFilterComponent } from 'common/components/search-filter/search-filter.component';
+import { PaginationComponent } from 'common/components/pagination/pagination.component';
 import * as classes from './character-collection.styles';
 
 // Material UI
@@ -17,10 +18,19 @@ import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 interface Props {
   characterCollection: CharacterVm[];
   handleOnSearch: (search: string) => Promise<void>;
+  currentPage: number;
+  setCurrentPage: (page: number) => void;
+  lastPage: number;
 }
 
 export const CharacterCollectionComponent: React.FC<Props> = (props) => {
-  const { characterCollection, handleOnSearch } = props;
+  const {
+    characterCollection,
+    handleOnSearch,
+    setCurrentPage,
+    currentPage,
+    lastPage,
+  } = props;
   const { characterList, listItem, detailLink, detailIcon } = classes;
 
   return (
@@ -51,6 +61,11 @@ export const CharacterCollectionComponent: React.FC<Props> = (props) => {
             </ListItem>
           ))}
       </List>
+      <PaginationComponent
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        lastPage={lastPage}
+      />
       {/* <ul>
         {!characterCollection.length && (
           <p>No results were found for your search</p>
