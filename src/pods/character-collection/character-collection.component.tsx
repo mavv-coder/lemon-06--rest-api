@@ -21,6 +21,7 @@ interface Props {
   currentPage: number;
   setCurrentPage: (page: number) => void;
   lastPage: number;
+  getCharacterCollection: () => Promise<void>;
 }
 
 export const CharacterCollectionComponent: React.FC<Props> = (props) => {
@@ -30,6 +31,7 @@ export const CharacterCollectionComponent: React.FC<Props> = (props) => {
     setCurrentPage,
     currentPage,
     lastPage,
+    getCharacterCollection,
   } = props;
   const { characterList, listItem, detailLink, detailIcon } = classes;
 
@@ -65,6 +67,7 @@ export const CharacterCollectionComponent: React.FC<Props> = (props) => {
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
         lastPage={lastPage}
+        getCollection={getCharacterCollection}
       />
       {/* <ul>
         {!characterCollection.length && (

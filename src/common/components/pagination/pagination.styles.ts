@@ -21,7 +21,8 @@ export const iconBtn = css`
   &:hover {
     background-color: #006553;
   }
-  &:first-of-type {
+  &:disabled {
+    background-color: #ccc;
   }
 `;
 

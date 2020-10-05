@@ -9,13 +9,19 @@ interface Props {
   currentPage: number;
   setCurrentPage: (page: number) => void;
   lastPage: number;
+  getCollection: () => Promise<void>;
 }
 
 export const PaginationComponent: React.FC<Props> = (props) => {
-  const { currentPage, setCurrentPage, lastPage } = props;
+  const { currentPage, setCurrentPage, lastPage, getCollection } = props;
   const { flexContainer, Pagtext, iconBtn, prevIcon, nextIcon } = classes;
 
-  const handlePreviousPage = (): void => {};
+  const handlePagination = (action: string): void => {
+    action === 'prev'
+      ? setCurrentPage(currentPage - 1)
+      : setCurrentPage(currentPage + 1);
+    getCollection();
+  };
 
   return (
     <div className={flexContainer}>
@@ -23,7 +29,7 @@ export const PaginationComponent: React.FC<Props> = (props) => {
         className={iconBtn}
         disabled={currentPage <= 1}
         aria-label="previous-page"
-        onClick={handlePreviousPage}
+        onClick={() => handlePagination('prev')}
       >
         <ArrowBackIosIcon className={prevIcon} />
       </IconButton>
@@ -34,6 +40,7 @@ export const PaginationComponent: React.FC<Props> = (props) => {
         className={iconBtn}
         disabled={currentPage === lastPage}
         aria-label="next-page"
+        onClick={() => handlePagination('next')}
       >
         <ArrowForwardIosIcon className={nextIcon} />
       </IconButton>
