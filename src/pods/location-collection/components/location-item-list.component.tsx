@@ -33,7 +33,7 @@ export const LocationItemListComponent: React.FC<Props> = (props) => {
       </ListItem>
       {location.residents.length > 0 && showResidents && (
         <>
-          <p aria-laber="resident-list-title" className={residentTitle}>
+          <p aria-label="resident-list-title" className={residentTitle}>
             Location residents
           </p>
           <List className={residentList}>

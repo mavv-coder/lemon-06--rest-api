@@ -16,6 +16,7 @@ export const residentItem = css`
 `;
 
 export const residentTitle = css`
+  font-family: inherit;
   font-size: 1rem;
   width: max-content;
   margin: 1rem 0 0 1rem;
