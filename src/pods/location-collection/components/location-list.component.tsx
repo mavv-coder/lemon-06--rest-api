@@ -1,5 +1,11 @@
 import React from 'react';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import ListItemText from '@material-ui/core/ListItemText';
 import { LocationVm } from '../location-collection.vm';
+import { DisplayResidentListComponent } from './display-resident-list.component';
+import * as classes from './location-list.styles';
 
 interface Props {
   locationCollection: LocationVm[];
@@ -7,19 +13,25 @@ interface Props {
 
 export const LocationListComponent: React.FC<Props> = (props) => {
   const { locationCollection } = props;
+  const { locationList, listItem } = classes;
+  const [showResidents, setShowResidents] = React.useState<boolean>(false);
+
+  const handleResidentList = () => {};
+
   return (
-    <ul>
-      {!locationCollection.length && (
-        <p>No results were found for your search</p>
-      )}
+    <List className={locationList}>
       {locationCollection.length > 0 &&
         locationCollection.map((location) => (
-          <li key={location.id}>
-            <p>Name: {location.name}</p>
-            <p>Dimension: {location.dimension}</p>
-            <p>Type: {location.type}</p>
-          </li>
+          <ListItem key={location.id} className={listItem}>
+            <ListItemText primary={location.name} secondary={location.type} />
+            <ListItemSecondaryAction>
+              <DisplayResidentListComponent
+                showResidents={showResidents}
+                handleResidentList={handleResidentList}
+              />
+            </ListItemSecondaryAction>
+          </ListItem>
         ))}
-    </ul>
+    </List>
   );
 };
