@@ -1,6 +1,6 @@
 import { css } from 'emotion';
 
-export const residentLink = css`
+export const buttonLink = css`
   position: relative;
   display: inline-block;
   margin-top: 0.3rem;
@@ -17,7 +17,7 @@ export const residentLink = css`
   }
 `;
 
-export const residentIcon = css`
+export const buttonIcon = css`
   position: absolute;
   top: 0.6rem;
   right: 0.6rem;

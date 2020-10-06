@@ -3,7 +3,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
-import { DisplayResidentListComponent } from './display-resident-list.component';
+import { DisplayInnerListButtonComponent } from '../../../common/components/display-inner-list-button/display-inner-list-button.component';
 import { LocationVm } from '../location-collection.vm';
 import * as classes from './location-item-list.styles';
 
@@ -24,10 +24,10 @@ export const LocationItemListComponent: React.FC<Props> = (props) => {
       <ListItem key={location.id} className={listItem}>
         <ListItemText primary={location.name} secondary={location.type} />
         <ListItemSecondaryAction>
-          <DisplayResidentListComponent
-            residents={location.residents}
-            showResidents={showResidents}
-            handleResidentList={handleResidentList}
+          <DisplayInnerListButtonComponent
+            dataList={location.residents}
+            displayInnerList={showResidents}
+            handleDataList={handleResidentList}
           />
         </ListItemSecondaryAction>
       </ListItem>
