@@ -6,31 +6,41 @@ import * as classes from './display-resident-list.styles';
 
 interface Props {
   showResidents: boolean;
-  handleResidentList: () => void;
+  handleResidentList: (v: boolean) => void;
+  residents: string[];
 }
 
 export const DisplayResidentListComponent: React.FC<Props> = (props) => {
-  const { handleResidentList, showResidents } = props;
-  const { residentIcon, residentLink } = classes;
+  const { handleResidentList, showResidents, residents } = props;
+  const { residentIcon, residentLink, disabledIcon } = classes;
 
   return (
     <>
-      {!showResidents && (
+      {!showResidents && residents.length > 0 && (
         <IconButton
           className={residentLink}
           aria-label="show-residents"
-          onClick={handleResidentList}
+          onClick={() => handleResidentList(true)}
         >
           <VisibilityOutlinedIcon className={residentIcon} />
         </IconButton>
       )}
-      {showResidents && (
+      {showResidents && residents.length > 0 && (
         <IconButton
           className={residentLink}
           aria-label="hide-residents"
-          onClick={handleResidentList}
+          onClick={() => handleResidentList(false)}
         >
           <VisibilityOffOutlinedIcon className={residentIcon} />
+        </IconButton>
+      )}
+      {!residents.length && (
+        <IconButton
+          className={residentLink}
+          aria-label="disabled-button"
+          disabled
+        >
+          <VisibilityOutlinedIcon className={disabledIcon} />
         </IconButton>
       )}
     </>

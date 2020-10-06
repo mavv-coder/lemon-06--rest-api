@@ -12,6 +12,9 @@ export const residentLink = css`
   &:hover {
     background-color: #999;
   }
+  &:disabled {
+    background-color: #ccc;
+  }
 `;
 
 export const residentIcon = css`
@@ -19,4 +22,11 @@ export const residentIcon = css`
   top: 0.6rem;
   right: 0.6rem;
   color: black;
+`;
+
+export const disabledIcon = css`
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  color: #999;
 `;
