@@ -1,9 +1,9 @@
 import React from 'react';
-import { CharacterVm } from './character-collection.vm';
 import { SearchFilterComponent } from 'common/components/search-filter/search-filter.component';
 import { PaginationComponent } from 'common/components/pagination/pagination.component';
 import { NoResultsComponent } from 'common/components/no-results/no-results.component';
 import { CharacterListComponent } from './components/character-list.component';
+import { CharacterVm } from './character-collection.vm';
 
 interface Props {
   characterCollection: CharacterVm[];
