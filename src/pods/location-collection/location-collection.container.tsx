@@ -19,7 +19,9 @@ export const LocationCollectionContainer: React.FC = () => {
   );
 
   React.useEffect(() => {
-    getDataCollection();
+    setTimeout(() => {
+      getDataCollection();
+    }, 1000);
   }, []);
 
   return (

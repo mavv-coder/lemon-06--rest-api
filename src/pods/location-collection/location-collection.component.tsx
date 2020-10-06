@@ -1,4 +1,5 @@
 import React from 'react';
+import { LoaderComponent } from 'common/components/loader/loader.component';
 import { SearchFilterComponent } from 'common/components/search-filter/search-filter.component';
 import { PaginationComponent } from 'common/components/pagination/pagination.component';
 import { NoResultsComponent } from 'common/components/no-results/no-results.component';
@@ -34,7 +35,8 @@ export const LocationCollectionComponent: React.FC<Props> = (props) => {
         setIsSearching={setIsSearching}
         placeholder="Search location name"
       />
-      {!locationCollection.length && <NoResultsComponent />}
+      {!locationCollection.length && !isSearching && <LoaderComponent />}
+      {!locationCollection.length && isSearching && <NoResultsComponent />}
       {locationCollection.length > 0 && (
         <LocationListComponent locationCollection={locationCollection} />
       )}
