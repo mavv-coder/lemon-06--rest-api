@@ -1,4 +1,5 @@
 import React from 'react';
+import { LoaderComponent } from 'common/components/loader/loader.component';
 import { SearchFilterComponent } from 'common/components/search-filter/search-filter.component';
 import { PaginationComponent } from 'common/components/pagination/pagination.component';
 import { NoResultsComponent } from 'common/components/no-results/no-results.component';
@@ -34,7 +35,8 @@ export const CharacterCollectionComponent: React.FC<Props> = (props) => {
         setIsSearching={setIsSearching}
         placeholder="Search character name"
       />
-      {!characterCollection.length && <NoResultsComponent />}
+      {!characterCollection.length && !isSearching && <LoaderComponent />}
+      {!characterCollection.length && isSearching && <NoResultsComponent />}
       {characterCollection.length > 0 && (
         <CharacterListComponent characterCollection={characterCollection} />
       )}
