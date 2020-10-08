@@ -1,14 +1,6 @@
 {
   "quotes": [
     {
-      "id": 2,
-      "quote": ""
-    },
-    {
-      "id": 3,
-      "quote": ""
-    },
-    {
       "id": 4,
       "quote": "What are you looking at?"
     },
@@ -17,28 +9,12 @@
       "quote": "Plrurrt tahhmmm mahhklll"
     },
     {
-      "id": 7,
-      "quote": ""
-    },
-    {
       "id": 8,
       "quote": "What the fuck?"
     },
     {
-      "id": 9,
-      "quote": ""
-    },
-    {
       "id": 10,
       "quote": "What up, my glip-glops?"
-    },
-    {
-      "id": 11,
-      "quote": ""
-    },
-    {
-      "id": 12,
-      "quote": ""
     },
     {
       "id": 13,
@@ -49,19 +25,11 @@
       "quote": "Do you like my green face?"
     },
     {
-      "id": 15,
-      "quote": ""
-    },
-    {
       "id": 16,
       "quote": "Technology is a pain in the ass, man…"
     },
     {
-      "id": 17,
-      "quote": ""
-    },
-    {
-      "quote": "I can read your mind using my antennas, so be careful!",
+      "quote": "I can read your mind with my antennas",
       "id": 18
     },
     {
@@ -69,20 +37,16 @@
       "quote": "Hola"
     },
     {
-      "quote": "",
-      "id": 1
-    },
-    {
       "id": 5,
       "quote": "I need a beer"
     },
     {
-      "quote": "",
-      "id": 20
-    },
-    {
       "id": 98,
       "quote": "Are you feeling ok? "
+    },
+    {
+      "id": 11,
+      "quote": "Science is fun"
     }
   ]
 }
