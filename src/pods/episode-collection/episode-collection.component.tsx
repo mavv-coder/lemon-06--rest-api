@@ -1,25 +1,63 @@
 import React from 'react';
+import { LoaderComponent } from 'common/components/loader/loader.component';
 import { SearchFilterComponent } from 'common/components/search-filter/search-filter.component';
+import { PaginationComponent } from 'common/components/pagination/pagination.component';
+import { NoResultsComponent } from 'common/components/no-results/no-results.component';
+import { ListItemComponent } from '../../common/components/list-item/list-item.component';
+import List from '@material-ui/core/List';
+import * as classes from './episode-collection.styles';
 import { EpisodeVm } from './episode-collection.vm';
 
 interface Props {
   episodeCollection: EpisodeVm[];
   handleOnSearch: (search: string) => Promise<void>;
+  currentPage: number;
+  setCurrentPage: (page: number) => void;
+  lastPage: number;
+  getEpisodeCollection: () => Promise<void>;
+  currentPageRef: React.MutableRefObject<number>;
 }
 
-export const EpisodeCollectionComponente: React.FC<Props> = (props) => {
-  const { episodeCollection, handleOnSearch } = props;
+export const EpisodeCollectionComponent: React.FC<Props> = (props) => {
+  const [isSearching, setIsSearching] = React.useState<boolean>(false);
+  const {
+    episodeCollection,
+    handleOnSearch,
+    setCurrentPage,
+    currentPage,
+    lastPage,
+    getEpisodeCollection,
+    currentPageRef,
+  } = props;
+  const { episodeList } = classes;
 
   return (
     <>
       <SearchFilterComponent
         handleOnSearch={handleOnSearch}
+        setIsSearching={setIsSearching}
         placeholder="Search episode name"
       />
-      <ul>
-        {!episodeCollection.length && (
-          <p>No results were found for your search</p>
-        )}
+      {!episodeCollection.length && !isSearching && <LoaderComponent />}
+      {!episodeCollection.length && isSearching && <NoResultsComponent />}
+
+      {episodeCollection.length > 0 && (
+        <List className={episodeList}>
+          {episodeCollection.length > 0 &&
+            episodeCollection.map((episode) => (
+              <ListItemComponent
+                key={episode.id}
+                id={episode.id}
+                primaryText={episode.name}
+                secondaryText={episode.episode}
+                innerListData={episode.characters}
+                listTitle="Cast list"
+              />
+            ))}
+        </List>
+      )}
+
+      {/* <ul>
         {episodeCollection.length > 0 &&
           episodeCollection.map((episode) => (
             <li key={episode.id}>
@@ -27,7 +65,17 @@ export const EpisodeCollectionComponente: React.FC<Props> = (props) => {
               <p>Episode: {episode.episode}</p>
             </li>
           ))}
-      </ul>
+      </ul> */}
+
+      {episodeCollection.length > 0 && !isSearching && (
+        <PaginationComponent
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          lastPage={lastPage}
+          getCollection={getEpisodeCollection}
+          currentPageRef={currentPageRef}
+        />
+      )}
     </>
   );
 };

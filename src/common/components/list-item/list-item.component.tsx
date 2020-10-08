@@ -11,10 +11,11 @@ interface Props {
   primaryText: string;
   secondaryText: string;
   innerListData: string[];
+  listTitle: string;
 }
 
 export const ListItemComponent: React.FC<Props> = (props) => {
-  const { id, primaryText, secondaryText, innerListData } = props;
+  const { id, primaryText, secondaryText, innerListData, listTitle } = props;
   const [displayInnerList, setDisplayInnerList] = React.useState<boolean>(
     false
   );
@@ -37,9 +38,7 @@ export const ListItemComponent: React.FC<Props> = (props) => {
       </ListItem>
       {innerListData.length > 0 && displayInnerList && (
         <>
-          <p aria-label="resident-list-title" className={residentTitle}>
-            Location residents
-          </p>
+          <p className={residentTitle}>{listTitle}</p>
           <List className={residentList}>
             {innerListData.length > 0 &&
               displayInnerList &&

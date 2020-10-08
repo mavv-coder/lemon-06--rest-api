@@ -1,44 +1,38 @@
 import React from 'react';
-import Axios from 'axios';
 import { EpisodeVm } from './episode-collection.vm';
 import { mapEpisodeCollectionFromApiToVm } from './episode-collection.mapper';
-import { EpisodeCollectionComponente } from './episode-collection.component';
+import { EpisodeCollectionComponent } from './episode-collection.component';
+import { useDataCollection } from 'common/hooks';
 
 export const EpisodeCollectionContainer: React.FC = () => {
-  const [episodeCollection, setEpisodeCollection] = React.useState<EpisodeVm[]>(
-    []
+  const {
+    getDataCollection,
+    searchDataCollection,
+    currentPage,
+    setCurrentPage,
+    lastPage,
+    dataCollection,
+    currentPageRef,
+  } = useDataCollection(
+    mapEpisodeCollectionFromApiToVm,
+    process.env.API_EPISODES_URL
   );
 
-  const getEpisodeCollection = async (): Promise<void> => {
-    const resolve = await Axios.get(process.env.API_EPISODES_URL);
-    const newCollection: EpisodeVm[] = mapEpisodeCollectionFromApiToVm(
-      resolve.data.results
-    );
-    setEpisodeCollection(newCollection);
-  };
-
-  const handleOnSearch = async (search: string): Promise<void> => {
-    try {
-      const resolve = await Axios.get(
-        `${process.env.API_EPISODES_URL}?name=${search}`
-      );
-      const newCollection: EpisodeVm[] = mapEpisodeCollectionFromApiToVm(
-        resolve.data.results
-      );
-      setEpisodeCollection(newCollection);
-    } catch {
-      setEpisodeCollection([]);
-    }
-  };
-
   React.useEffect(() => {
-    getEpisodeCollection();
+    setTimeout(() => {
+      getDataCollection();
+    }, 1000);
   }, []);
 
   return (
-    <EpisodeCollectionComponente
-      episodeCollection={episodeCollection}
-      handleOnSearch={handleOnSearch}
+    <EpisodeCollectionComponent
+      episodeCollection={dataCollection as EpisodeVm[]}
+      handleOnSearch={searchDataCollection}
+      currentPage={currentPage}
+      setCurrentPage={setCurrentPage}
+      lastPage={lastPage}
+      getEpisodeCollection={getDataCollection}
+      currentPageRef={currentPageRef}
     />
   );
 };

@@ -51,6 +51,7 @@ export const LocationCollectionComponent: React.FC<Props> = (props) => {
                 primaryText={location.name}
                 secondaryText={location.type}
                 innerListData={location.residents}
+                listTitle="Resident list"
               />
             ))}
         </List>
