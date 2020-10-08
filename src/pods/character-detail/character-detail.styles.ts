@@ -18,6 +18,9 @@ export const buttonLink = css`
   &:hover {
     background-color: #ccc;
   }
+  &:disabled {
+    background-color: #ccc;
+  }
 `;
 
 export const link = css`

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { switchRoutes } from 'core/router';
 import IconButton from '@material-ui/core/IconButton';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
+import AddIcon from '@material-ui/icons/Add';
 import HighlightOffOutlinedIcon from '@material-ui/icons/HighlightOffOutlined';
 import Button from '@material-ui/core/Button';
 import { CharacterVm } from './character-detail.vm';
@@ -11,15 +12,16 @@ import InputBase from '@material-ui/core/InputBase';
 
 interface Props {
   character: CharacterVm;
-  onUpdate: (id: number) => void;
-  setUpdatedQuote: (value: string) => void;
-  updatedQuote: string;
+  onUpdate: (id: number, quote: string) => void;
   characterQuote: string;
 }
 
 export const CharacterDetailComponent: React.FC<Props> = (props) => {
-  const { character, onUpdate, setUpdatedQuote, characterQuote } = props;
+  const { character, onUpdate, characterQuote } = props;
   const [isEditMode, setIsEditMode] = React.useState<boolean>(false);
+  const [updatedQuote, setUpdatedQuote] = React.useState<string>(
+    characterQuote
+  );
   const {
     mainContainer,
     updateButton,
@@ -39,7 +41,9 @@ export const CharacterDetailComponent: React.FC<Props> = (props) => {
   } = classes;
 
   const handleUpdate = (id: number) => {
-    onUpdate(character.id);
+    if (updatedQuote) {
+      onUpdate(id, updatedQuote);
+    }
     setIsEditMode(false);
   };
 
@@ -70,18 +74,13 @@ export const CharacterDetailComponent: React.FC<Props> = (props) => {
                   ? `"${characterQuote}"`
                   : "This character doesn't have a quote"}
               </p>
-              <div className={iconContainer}>
-                <IconButton
-                  onClick={() => setIsEditMode(true)}
-                  className={buttonLink}
-                  aria-label="edit-button"
-                >
-                  <EditOutlinedIcon className={buttonIcon} />
-                </IconButton>
-                <IconButton className={buttonLink} aria-label="delete-button">
-                  <HighlightOffOutlinedIcon className={buttonIcon} />
-                </IconButton>
-              </div>
+              <IconButton
+                onClick={() => setIsEditMode(true)}
+                className={buttonLink}
+                aria-label="edit-button"
+              >
+                <EditOutlinedIcon className={buttonIcon} />
+              </IconButton>
             </div>
           )}
           {isEditMode && (
@@ -90,18 +89,25 @@ export const CharacterDetailComponent: React.FC<Props> = (props) => {
                 className={inputSearch}
                 type="text"
                 defaultValue={characterQuote}
-                onChange={(e) => {
-                  if (e.target.value) setUpdatedQuote(e.target.value);
-                }}
+                onChange={(e) => setUpdatedQuote(e.target.value)}
               />
-              <Button
-                variant="contained"
-                disableElevation
-                className={updateButton}
-                onClick={() => handleUpdate(character.id)}
-              >
-                UPDATE
-              </Button>
+              <div className={iconContainer}>
+                <IconButton
+                  onClick={() => handleUpdate(character.id)}
+                  className={buttonLink}
+                  aria-label="edit-button"
+                  disabled={!updatedQuote}
+                >
+                  <AddIcon className={buttonIcon} />
+                </IconButton>
+                <IconButton
+                  onClick={() => setIsEditMode(false)}
+                  className={buttonLink}
+                  aria-label="edit-button"
+                >
+                  <HighlightOffOutlinedIcon className={buttonIcon} />
+                </IconButton>
+              </div>
             </div>
           )}
         </article>

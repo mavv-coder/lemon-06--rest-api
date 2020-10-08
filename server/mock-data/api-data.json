@@ -61,15 +61,15 @@
       "quote": ""
     },
     {
-      "id": 18,
-      "quote": "I can read your mind using my antennas, so be careful!"
+      "quote": "I can read your mind using my antennas, so be careful!",
+      "id": 18
     },
     {
       "id": 135,
       "quote": "Hola"
     },
     {
-      "quote": "haha",
+      "quote": "",
       "id": 1
     },
     {
@@ -79,6 +79,10 @@
     {
       "quote": "",
       "id": 20
+    },
+    {
+      "id": 98,
+      "quote": "Are you feeling ok? "
     }
   ]
 }
