@@ -4,6 +4,9 @@ export interface CharacterVm {
   image: string;
   species: string;
   origin: string;
+  lastLocation: string;
+  gender: string;
+  status: string;
 }
 
 export interface Quote {
@@ -17,4 +20,7 @@ export const createEmptyCharacter = (): CharacterVm => ({
   image: '',
   species: '',
   origin: '',
+  lastLocation: '',
+  gender: '',
+  status: '',
 });
