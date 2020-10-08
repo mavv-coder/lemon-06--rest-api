@@ -12,7 +12,7 @@ export const buttonLink = css`
   margin-left: 1rem;
   height: 2.7rem;
   width: 2.7rem;
-  background-color: white;
+  background-color: #eee;
   border-radius: 50%;
   transition: all 0.1s ease-in-out;
   &:hover {
@@ -93,4 +93,21 @@ export const quoteContainer = css`
 export const iconContainer = css`
   display: flex;
   align-items: center;
+`;
+
+export const inputSearch = css`
+  width: 100%;
+  color: #455073;
+  font-style: italic;
+  padding: 0.1rem 1rem;
+  border-radius: 0.5rem;
+  background-color: white;
+`;
+
+export const updateButton = css`
+  margin-left: 1rem;
+  background-color: #eee;
+  &:hover {
+    background-color: #ccc;
+  }
 `;

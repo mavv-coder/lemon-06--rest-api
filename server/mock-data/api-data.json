@@ -65,10 +65,6 @@
       "quote": "I can read your mind using my antennas, so be careful!"
     },
     {
-      "quote": "Do you like ants? I do",
-      "id": 20
-    },
-    {
       "id": 135,
       "quote": "Hola"
     },
@@ -79,6 +75,10 @@
     {
       "id": 5,
       "quote": "I need a beer"
+    },
+    {
+      "quote": "",
+      "id": 20
     }
   ]
 }
