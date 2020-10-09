@@ -19,6 +19,7 @@ export const CharacterDetailContainer: React.FC = () => {
     createEmptyCharacter()
   );
   const [characterQuote, setCharacterQuote] = React.useState<string>('');
+  const isQuoteRef = React.useRef<boolean>(false);
 
   const checkIfQuoteExist = async (): Promise<boolean> => {
     const resolve = await Axios.get('api/quotes');
@@ -36,8 +37,7 @@ export const CharacterDetailContainer: React.FC = () => {
     setCharacter(newCharacter);
   };
 
-  const getCharacterQuote = async (): Promise<void> => {
-    const isQuote = await checkIfQuoteExist();
+  const getCharacterQuote = async (isQuote: boolean): Promise<void> => {
     if (isQuote) {
       const resolve = await Axios.get(
         `${process.env.API_QUOTES_URL}${params.id}`
@@ -50,7 +50,7 @@ export const CharacterDetailContainer: React.FC = () => {
     id: number,
     quote: string
   ): Promise<boolean> => {
-    if (!characterQuote) {
+    if (!isQuoteRef.current) {
       Axios.post(process.env.API_QUOTES_URL, { id, quote: quote });
     } else {
       Axios.put(`${process.env.API_QUOTES_URL}${id}`, {
@@ -61,9 +61,15 @@ export const CharacterDetailContainer: React.FC = () => {
     return true;
   };
 
-  React.useEffect(() => {
+  const getAllData = async (): Promise<void> => {
+    const isQuoteInApi = await checkIfQuoteExist();
+    isQuoteRef.current = isQuoteInApi;
     getCharacter();
-    getCharacterQuote();
+    getCharacterQuote(isQuoteRef.current);
+  };
+
+  React.useEffect(() => {
+    getAllData();
   }, []);
 
   return (
