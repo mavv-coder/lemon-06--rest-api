@@ -10,7 +10,6 @@ export const flexContainer = css`
 export const btnContainer = css`
   flex: 1;
   margin-right: 2rem;
-
   &:last-of-type {
     margin-right: 0;
   }
