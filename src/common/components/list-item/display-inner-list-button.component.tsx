@@ -19,7 +19,7 @@ export const DisplayInnerListButtonComponent: React.FC<Props> = (props) => {
       {!displayInnerList && dataList.length > 0 && (
         <IconButton
           className={buttonLink}
-          aria-label="show-residents"
+          aria-label="show-list"
           onClick={() => handleDataList(true)}
         >
           <VisibilityOutlinedIcon className={buttonIcon} />
@@ -28,7 +28,7 @@ export const DisplayInnerListButtonComponent: React.FC<Props> = (props) => {
       {displayInnerList && dataList.length > 0 && (
         <IconButton
           className={buttonLink}
-          aria-label="hide-residents"
+          aria-label="hide-list"
           onClick={() => handleDataList(false)}
         >
           <VisibilityOffOutlinedIcon className={buttonIcon} />

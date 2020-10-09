@@ -14,8 +14,8 @@ export const inputSearch = css`
 
 export const searchIcon = css`
   position: absolute;
-  font-size: 1.5rem;
-  color: #999;
   top: 0.7rem;
   left: 0.8rem;
+  font-size: 1.5rem;
+  color: #999;
 `;

@@ -1,13 +1,12 @@
 import React from 'react';
+import List from '@material-ui/core/List';
 import { LoaderComponent } from 'common/components/loader/loader.component';
 import { SearchFilterComponent } from 'common/components/search-filter/search-filter.component';
 import { PaginationComponent } from 'common/components/pagination/pagination.component';
 import { NoResultsComponent } from 'common/components/no-results/no-results.component';
 import { ListItemComponent } from '../../common/components/list-item/list-item.component';
-import * as classes from './location-collection.styles';
-
-import List from '@material-ui/core/List';
 import { LocationVm } from './location-collection.vm';
+import * as classes from './location-collection.styles';
 
 interface Props {
   locationCollection: LocationVm[];

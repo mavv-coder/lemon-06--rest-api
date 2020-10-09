@@ -3,11 +3,11 @@ import { css } from 'emotion';
 export const buttonLink = css`
   position: relative;
   display: inline-block;
-  margin-top: 0.3rem;
   height: 2.7rem;
   width: 2.7rem;
-  background-color: #ccc;
+  margin-top: 0.3rem;
   border-radius: 50%;
+  background-color: #ccc;
   transition: all 0.1s ease-in-out;
   &:hover {
     background-color: #999;

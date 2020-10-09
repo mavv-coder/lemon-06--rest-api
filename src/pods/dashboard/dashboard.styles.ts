@@ -3,6 +3,7 @@ import { css } from 'emotion';
 export const flexContainer = css`
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   width: 100%;
 `;
 

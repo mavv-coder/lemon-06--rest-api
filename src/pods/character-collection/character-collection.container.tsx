@@ -1,8 +1,8 @@
 import React from 'react';
+import { useDataCollection } from 'common/hooks';
 import { CharacterVm } from './character-collection.vm';
 import { mapCharacterCollectionFromApiToVm } from './character-collection.mapper';
 import { CharacterCollectionComponent } from './character-collection.component';
-import { useDataCollection } from 'common/hooks';
 
 export const CharacterCollectionContainer: React.FC = () => {
   const {

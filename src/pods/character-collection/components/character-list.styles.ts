@@ -1,8 +1,8 @@
 import { css } from 'emotion';
 
 export const characterList = css`
-  border-top: 1px solid #ccc;
   padding: 0;
+  border-top: 1px solid #ccc;
 `;
 
 export const listItem = css`
@@ -15,11 +15,11 @@ export const listItem = css`
 export const detailLink = css`
   position: relative;
   display: inline-block;
-  margin-top: 0.3rem;
-  height: 2.7rem;
   width: 2.7rem;
-  background-color: #ccc;
+  height: 2.7rem;
+  margin-top: 0.3rem;
   border-radius: 50%;
+  background-color: #ccc;
   transition: all 0.1s ease-in-out;
   &:hover {
     background-color: #999;

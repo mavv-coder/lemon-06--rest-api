@@ -1,12 +1,12 @@
 import React from 'react';
+import List from '@material-ui/core/List';
 import { LoaderComponent } from 'common/components/loader/loader.component';
 import { SearchFilterComponent } from 'common/components/search-filter/search-filter.component';
 import { PaginationComponent } from 'common/components/pagination/pagination.component';
 import { NoResultsComponent } from 'common/components/no-results/no-results.component';
 import { ListItemComponent } from '../../common/components/list-item/list-item.component';
-import List from '@material-ui/core/List';
-import * as classes from './episode-collection.styles';
 import { EpisodeVm } from './episode-collection.vm';
+import * as classes from './episode-collection.styles';
 
 interface Props {
   episodeCollection: EpisodeVm[];
@@ -40,7 +40,6 @@ export const EpisodeCollectionComponent: React.FC<Props> = (props) => {
       />
       {!episodeCollection.length && !isSearching && <LoaderComponent />}
       {!episodeCollection.length && isSearching && <NoResultsComponent />}
-
       {episodeCollection.length > 0 && (
         <List className={episodeList}>
           {episodeCollection.length > 0 &&
@@ -56,17 +55,6 @@ export const EpisodeCollectionComponent: React.FC<Props> = (props) => {
             ))}
         </List>
       )}
-
-      {/* <ul>
-        {episodeCollection.length > 0 &&
-          episodeCollection.map((episode) => (
-            <li key={episode.id}>
-              <p>Name: {episode.name}</p>
-              <p>Episode: {episode.episode}</p>
-            </li>
-          ))}
-      </ul> */}
-
       {episodeCollection.length > 0 && !isSearching && (
         <PaginationComponent
           currentPage={currentPage}
