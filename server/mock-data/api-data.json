@@ -1,7 +1,7 @@
 {
   "quotes": [
     {
-      "quote": "Science can be fun!",
+      "quote": "Science can be very fun!",
       "id": 1
     },
     {
@@ -55,6 +55,10 @@
     {
       "id": 2,
       "quote": "I just want to play videogames!"
+    },
+    {
+      "id": 17,
+      "quote": "Wow, I like your hair color!"
     }
   ]
 }

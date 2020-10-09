@@ -1,13 +1,13 @@
 import Axios from 'axios';
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import { mapCharacterFromApiToVm } from './character-detail.mapper';
+import { CharacterDetailComponent } from './character-detail.component';
 import {
   CharacterVm,
   createEmptyCharacter,
   Quote,
 } from './character-detail.vm';
-import { mapCharacterFromApiToVm } from './character-detail.mapper';
-import { CharacterDetailComponent } from './character-detail.component';
 
 interface Params {
   id: string;
@@ -15,11 +15,11 @@ interface Params {
 
 export const CharacterDetailContainer: React.FC = () => {
   const params: Params = useParams();
+  const isQuoteRef = React.useRef<boolean>(false);
+  const [characterQuote, setCharacterQuote] = React.useState<string>('');
   const [character, setCharacter] = React.useState<CharacterVm>(
     createEmptyCharacter()
   );
-  const [characterQuote, setCharacterQuote] = React.useState<string>('');
-  const isQuoteRef = React.useRef<boolean>(false);
 
   const checkIfQuoteExist = async (): Promise<boolean> => {
     const resolve = await Axios.get('api/quotes');
@@ -46,19 +46,13 @@ export const CharacterDetailContainer: React.FC = () => {
     }
   };
 
-  const handleUpdateQuote = async (
-    id: number,
-    quote: string
-  ): Promise<boolean> => {
-    if (!isQuoteRef.current) {
-      Axios.post(process.env.API_QUOTES_URL, { id, quote: quote });
-    } else {
-      Axios.put(`${process.env.API_QUOTES_URL}${id}`, {
-        quote: quote,
-      });
-    }
+  const updateQuote = async (id: number, quote: string): Promise<void> => {
+    !isQuoteRef.current
+      ? Axios.post(process.env.API_QUOTES_URL, { id, quote: quote })
+      : Axios.put(`${process.env.API_QUOTES_URL}${id}`, {
+          quote: quote,
+        });
     setCharacterQuote(quote);
-    return true;
   };
 
   const getAllData = async (): Promise<void> => {
@@ -75,7 +69,7 @@ export const CharacterDetailContainer: React.FC = () => {
   return (
     <CharacterDetailComponent
       character={character}
-      onUpdate={handleUpdateQuote}
+      onUpdate={updateQuote}
       characterQuote={characterQuote}
     />
   );
