@@ -19,9 +19,7 @@ export const CharacterCollectionContainer: React.FC = () => {
   );
 
   React.useEffect(() => {
-    setTimeout(() => {
-      getDataCollection();
-    }, 1000);
+    getDataCollection();
   }, []);
 
   return (
