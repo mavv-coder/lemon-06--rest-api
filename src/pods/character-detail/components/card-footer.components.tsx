@@ -58,7 +58,7 @@ export const CardFooterComponent: React.FC<Props> = (props) => {
           <InputBase
             className={updateInput}
             type="text"
-            defaultValue={characterQuote}
+            placeholder="Insert new quote"
             onChange={(e) => setUpdatedQuote(e.target.value)}
           />
           <div className={iconContainer}>

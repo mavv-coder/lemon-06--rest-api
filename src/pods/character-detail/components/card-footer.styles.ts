@@ -50,13 +50,6 @@ export const addIcon = css`
   }
 `;
 
-export const disabledIcon = css`
-  position: absolute;
-  top: 0.6rem;
-  right: 0.6rem;
-  color: #999;
-`;
-
 export const deleteIcon = css`
   position: absolute;
   top: 0.6rem;
