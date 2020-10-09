@@ -22,27 +22,24 @@ export const CharacterDetailContainer: React.FC = () => {
   );
 
   const checkIfQuoteExist = async (): Promise<boolean> => {
-    const resolve = await Axios.get('api/quotes');
-    return (
-      resolve.data.findIndex((el: Quote) => el.id === parseInt(params.id)) !==
-      -1
-    );
+    const { data } = await Axios.get('api/quotes');
+    return data.findIndex((el: Quote) => el.id === parseInt(params.id)) !== -1;
   };
 
   const getCharacter = async (): Promise<void> => {
-    const resolve = await Axios.get(
+    const { data } = await Axios.get(
       `${process.env.API_CHARACTERS_URL}${params.id}`
     );
-    const newCharacter: CharacterVm = mapCharacterFromApiToVm(resolve.data);
+    const newCharacter: CharacterVm = mapCharacterFromApiToVm(data);
     setCharacter(newCharacter);
   };
 
   const getCharacterQuote = async (isQuote: boolean): Promise<void> => {
     if (isQuote) {
-      const resolve = await Axios.get(
+      const { data } = await Axios.get(
         `${process.env.API_QUOTES_URL}${params.id}`
       );
-      setCharacterQuote(resolve.data.quote);
+      setCharacterQuote(data.quote);
     }
   };
 

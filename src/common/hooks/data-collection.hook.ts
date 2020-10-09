@@ -17,16 +17,16 @@ export const useDataCollection = (mapper: Mapper, url: string) => {
   const currentPageRef = React.useRef(currentPage);
 
   const getDataCollection = async (): Promise<void> => {
-    const resolve = await Axios.get(`${url}?page=${currentPageRef.current}`);
-    const newCollection = mapper(resolve.data.results);
-    setLastPage(resolve.data.info.pages);
+    const { data } = await Axios.get(`${url}?page=${currentPageRef.current}`);
+    const newCollection = mapper(data.results);
+    setLastPage(data.info.pages);
     setDataCollection(newCollection);
   };
 
   const searchDataCollection = async (search: string): Promise<void> => {
     try {
-      const resolve = await Axios.get(`${url}?name=${search}`);
-      const newCollection = mapper(resolve.data.results);
+      const { data } = await Axios.get(`${url}?name=${search}`);
+      const newCollection = mapper(data.results);
       setDataCollection(newCollection);
     } catch {
       setDataCollection([]);
