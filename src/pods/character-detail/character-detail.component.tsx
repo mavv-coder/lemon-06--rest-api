@@ -23,7 +23,7 @@ export const CharacterDetailComponent: React.FC<Props> = (props) => {
 
   const handleUpdate = (id: number): void => {
     setIsEditMode(false);
-    if (updatedQuote) onUpdate(id, updatedQuote);
+    onUpdate(id, updatedQuote);
   };
 
   return (
@@ -39,7 +39,6 @@ export const CharacterDetailComponent: React.FC<Props> = (props) => {
           isEditMode={isEditMode}
           setIsEditMode={setIsEditMode}
           characterQuote={characterQuote}
-          updatedQuote={updatedQuote}
           setUpdatedQuote={setUpdatedQuote}
           handleUpdate={handleUpdate}
           characterId={character.id}

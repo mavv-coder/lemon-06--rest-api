@@ -10,7 +10,6 @@ interface Props {
   isEditMode: boolean;
   setIsEditMode: (v: boolean) => void;
   characterQuote: string;
-  updatedQuote: string;
   setUpdatedQuote: (quote: string) => void;
   handleUpdate: (id: number) => void;
   characterId: number;
@@ -21,7 +20,6 @@ export const CardFooterComponent: React.FC<Props> = (props) => {
     isEditMode,
     setIsEditMode,
     characterQuote,
-    updatedQuote,
     setUpdatedQuote,
     handleUpdate,
     characterId,
@@ -31,7 +29,6 @@ export const CardFooterComponent: React.FC<Props> = (props) => {
     quote,
     editButton,
     editIcon,
-    disabledIcon,
     updateInput,
     iconContainer,
     addIcon,
@@ -69,9 +66,8 @@ export const CardFooterComponent: React.FC<Props> = (props) => {
               onClick={() => handleUpdate(characterId)}
               className={editButton}
               aria-label="edit-button"
-              disabled={!updatedQuote}
             >
-              <AddIcon className={updatedQuote ? addIcon : disabledIcon} />
+              <AddIcon className={addIcon} />
             </IconButton>
             <IconButton
               onClick={() => setIsEditMode(false)}
