@@ -39,7 +39,9 @@ export const CharacterDetailContainer: React.FC = () => {
       const { data } = await Axios.get(
         `${process.env.API_QUOTES_URL}${params.id}`
       );
-      setCharacterQuote(data.quote);
+      data.quote === undefined
+        ? setCharacterQuote('')
+        : setCharacterQuote(data.quote);
     }
   };
 
