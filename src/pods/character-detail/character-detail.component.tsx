@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { switchRoutes } from 'core/router';
 import Button from '@material-ui/core/Button';
-import { CharacterVm } from './character-detail.vm';
+import { CharacterVm } from './character-detail.models';
 import { CardComponent } from './components/card.component';
 import { CardFooterComponent } from './components/card-footer.components';
 import * as classes from './character-detail.styles';
