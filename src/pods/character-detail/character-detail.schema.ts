@@ -1,6 +1,6 @@
 import { gql } from 'graphql-request';
 
-export const characterQuery = (id: string) => {
+export const characterQuery = (id: string): string => {
   return gql`
     query {
     character(id: "${id}"){

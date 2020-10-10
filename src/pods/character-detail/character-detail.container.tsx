@@ -1,17 +1,16 @@
-import Axios from 'axios';
 import React from 'react';
+import Axios from 'axios';
+import { graphQLClient } from 'core/api/graphql.client';
 import { useParams } from 'react-router-dom';
 import { mapCharacterFromApiToVm } from './character-detail.mapper';
 import { CharacterDetailComponent } from './character-detail.component';
+import { characterQuery } from './character-detail.schema';
 import {
   CharacterVm,
   GetCharacterResponse,
   createEmptyCharacter,
   Quote,
 } from './character-detail.models';
-import { characterQuery } from './character-detail.schema';
-
-import { graphQLClient } from 'core/api/graphql.client';
 
 interface Params {
   id: string;
@@ -35,7 +34,6 @@ export const CharacterDetailContainer: React.FC = () => {
       characterQuery(params.id)
     );
     const newCharacter: CharacterVm = mapCharacterFromApiToVm(character);
-    console.log(newCharacter);
     setCharacter(newCharacter);
   };
 
