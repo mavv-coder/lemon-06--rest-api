@@ -5,7 +5,7 @@ import { CharacterCollectionComponent } from './character-collection.component';
 import {
   CharacterVm,
   GetCharacterCollectionResponse,
-  FilterCharacterCollection,
+  FilterCharacterCollectionResponse,
 } from './character-collection.models';
 import {
   characterCollectionQuery,
@@ -32,7 +32,7 @@ export const CharacterCollectionContainer: React.FC = () => {
   const searchCharacterCollection = async (search: string): Promise<void> => {
     try {
       const { characters } = await graphQLClient.request<
-        FilterCharacterCollection
+        FilterCharacterCollectionResponse
       >(filterCharacterQuery(search));
       const newCollection = mapCharacterCollectionFromApiToVm(
         characters.results

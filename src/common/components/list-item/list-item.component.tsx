@@ -24,6 +24,9 @@ export const ListItemComponent: React.FC<Props> = (props) => {
   const handleInnerList = (v: boolean) => {
     setDisplayInnerList(v);
   };
+
+  const generateKey = () => (Math.random() * 1000).toString();
+
   return (
     <div key={id}>
       <ListItem key={id} className={listItem}>
@@ -43,7 +46,10 @@ export const ListItemComponent: React.FC<Props> = (props) => {
             {innerListData.length > 0 &&
               displayInnerList &&
               innerListData.map((resident) => (
-                <ListItem key={resident} className={residentItem}>
+                <ListItem
+                  key={generateKey() + resident}
+                  className={residentItem}
+                >
                   {resident}
                 </ListItem>
               ))}

@@ -22,7 +22,7 @@ export interface GetCharacterCollectionResponse {
   characters: CharacterCollection;
 }
 
-export interface FilterCharacterCollection {
+export interface FilterCharacterCollectionResponse {
   characters: CharacterFilter;
 }
 

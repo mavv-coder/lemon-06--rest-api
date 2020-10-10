@@ -1,35 +1,59 @@
 import React from 'react';
-import { EpisodeVm } from './episode-collection.vm';
+import { graphQLClient } from 'core/api/graphql.client';
+import {
+  EpisodeVm,
+  GetEpisodeCollectionResponse,
+  FilterEpisodeCollectionResponse,
+} from './episode-collection.models';
 import { mapEpisodeCollectionFromApiToVm } from './episode-collection.mapper';
 import { EpisodeCollectionComponent } from './episode-collection.component';
-import { useDataCollection } from 'common/hooks';
+import {
+  episodeCollectionQuery,
+  filterCharacterQuery,
+} from './episode-collection.schema';
 
 export const EpisodeCollectionContainer: React.FC = () => {
-  const {
-    getDataCollection,
-    searchDataCollection,
-    currentPage,
-    setCurrentPage,
-    lastPage,
-    dataCollection,
-    currentPageRef,
-  } = useDataCollection(
-    mapEpisodeCollectionFromApiToVm,
-    process.env.API_EPISODES_URL
+  const [currentPage, setCurrentPage] = React.useState<number>(1);
+  const [lastPage, setLastPage] = React.useState<number>(0);
+  const [episodeCollection, setEpisodeCollection] = React.useState<EpisodeVm[]>(
+    []
   );
+  const currentPageRef = React.useRef(currentPage);
+
+  const getEpisodeCollection = async (): Promise<void> => {
+    const { episodes } = await graphQLClient.request<
+      GetEpisodeCollectionResponse
+    >(episodeCollectionQuery(currentPageRef.current));
+    const newCollection = mapEpisodeCollectionFromApiToVm(episodes.results);
+    setLastPage(episodes.info.pages);
+    setEpisodeCollection(newCollection);
+    console.log(newCollection);
+  };
+
+  const searchEpisodeCollection = async (search: string): Promise<void> => {
+    try {
+      const { episodes } = await graphQLClient.request<
+        FilterEpisodeCollectionResponse
+      >(filterCharacterQuery(search));
+      const newCollection = mapEpisodeCollectionFromApiToVm(episodes.results);
+      setEpisodeCollection(newCollection);
+    } catch {
+      setEpisodeCollection([]);
+    }
+  };
 
   React.useEffect(() => {
-    getDataCollection();
+    getEpisodeCollection();
   }, []);
 
   return (
     <EpisodeCollectionComponent
-      episodeCollection={dataCollection as EpisodeVm[]}
-      handleOnSearch={searchDataCollection}
+      episodeCollection={episodeCollection}
+      handleOnSearch={searchEpisodeCollection}
       currentPage={currentPage}
       setCurrentPage={setCurrentPage}
       lastPage={lastPage}
-      getEpisodeCollection={getDataCollection}
+      getEpisodeCollection={getEpisodeCollection}
       currentPageRef={currentPageRef}
     />
   );

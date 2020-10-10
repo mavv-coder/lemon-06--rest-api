@@ -1,13 +1,14 @@
-import { EpisodeApi } from 'common/models';
-import { EpisodeVm } from './episode-collection.vm';
+import { EpisodeGql, EpisodeVm } from './episode-collection.models';
 
-const mapEpisodeFromApiToVm = (episode: EpisodeApi): EpisodeVm => ({
-  id: episode.id,
-  name: episode.name,
-  episode: episode.episode,
-  characters: episode.characters,
+const mapCharacterName = (list: { name: string }[]): string[] =>
+  list.map((el) => el.name);
+
+const mapEpisodeFromApiToVm = (episode: EpisodeGql): EpisodeVm => ({
+  ...episode,
+  id: parseInt(episode.id),
+  characters: mapCharacterName(episode.characters),
 });
 
 export const mapEpisodeCollectionFromApiToVm = (
-  collection: EpisodeApi[]
+  collection: EpisodeGql[]
 ): EpisodeVm[] => collection.map(mapEpisodeFromApiToVm);
