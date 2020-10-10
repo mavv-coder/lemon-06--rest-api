@@ -23,7 +23,7 @@ export const CharacterDetailComponent: React.FC<Props> = (props) => {
 
   const handleUpdate = (id: number): void => {
     setIsEditMode(false);
-    onUpdate(id, updatedQuote);
+    onUpdate(id, updatedQuote.trim());
   };
 
   return (
