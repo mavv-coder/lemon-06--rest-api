@@ -1,8 +1,12 @@
 import React from 'react';
 import { graphQLClient } from 'core/api/graphql.client';
-import { CharacterVm } from './character-collection.models';
 import { mapCharacterCollectionFromApiToVm } from './character-collection.mapper';
 import { CharacterCollectionComponent } from './character-collection.component';
+import {
+  CharacterVm,
+  GetCharacterCollectionResponse,
+  FilterCharacterCollection,
+} from './character-collection.models';
 import {
   characterCollectionQuery,
   filterCharacterQuery,
@@ -17,25 +21,26 @@ export const CharacterCollectionContainer: React.FC = () => {
   const currentPageRef = React.useRef(currentPage);
 
   const getCharacterCollection = async (): Promise<void> => {
-    const { characters } = await graphQLClient.request(
-      characterCollectionQuery(currentPageRef.current)
-    );
+    const { characters } = await graphQLClient.request<
+      GetCharacterCollectionResponse
+    >(characterCollectionQuery(currentPageRef.current));
     const newCollection = mapCharacterCollectionFromApiToVm(characters.results);
     setLastPage(characters.info.pages);
     setCharacterCollection(newCollection);
   };
 
   const searchCharacterCollection = async (search: string): Promise<void> => {
-    // try {
-    //   const response =  await graphQLClient.request(filterCharacterQuery(search));
-    //   console.log(response);
-    //   const newCollection = mapCharacterCollectionFromApiToVm(
-    //     resolve.data.results
-    //   );
-    //   setCharacterCollection(newCollection);
-    // } catch {
-    //   setCharacterCollection([]);
-    // }
+    try {
+      const { characters } = await graphQLClient.request<
+        FilterCharacterCollection
+      >(filterCharacterQuery(search));
+      const newCollection = mapCharacterCollectionFromApiToVm(
+        characters.results
+      );
+      setCharacterCollection(newCollection);
+    } catch {
+      setCharacterCollection([]);
+    }
   };
 
   React.useEffect(() => {

@@ -9,13 +9,21 @@ type Info = {
   pages: number;
 };
 
-type Characters = {
+type CharacterCollection = {
   results: CharacterGql[];
   info: Info;
 };
 
-export interface GetCharacterResponse {
-  characters: Characters;
+type CharacterFilter = {
+  results: CharacterGql[];
+};
+
+export interface GetCharacterCollectionResponse {
+  characters: CharacterCollection;
+}
+
+export interface FilterCharacterCollection {
+  characters: CharacterFilter;
 }
 
 export interface CharacterVm {

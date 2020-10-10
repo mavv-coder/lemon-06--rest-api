@@ -4,7 +4,7 @@ import { gql } from 'graphql-request';
 import { graphQLClient } from 'core/api/graphql.client';
 import { CharacterGql } from 'pods/character-detail/character-detail.models';
 import { EpisodeApi, LocationApi } from 'common/models';
-import { CharacterVm } from 'pods/character-collection/character-collection.vm';
+import { CharacterVm } from 'pods/character-collection/character-collection.models';
 import { EpisodeVm } from 'pods/episode-collection/episode-collection.vm';
 import { LocationVm } from 'pods/location-collection/location-collection.vm';
 

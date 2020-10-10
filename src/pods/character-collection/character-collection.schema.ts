@@ -18,9 +18,10 @@ export const characterCollectionQuery = (page: number): string => {
   `;
 };
 
-export const filterCharacterQuery = (name: string): string => {
+export const filterCharacterQuery = (search: string): string => {
   return gql`
-    characters(filter: { name: "${name}" }) {
+  query {
+    characters(filter: { name: "${search}" }) {
       results {
         id
         name
@@ -28,5 +29,6 @@ export const filterCharacterQuery = (name: string): string => {
         species
       }
     }
+  }
   `;
 };
