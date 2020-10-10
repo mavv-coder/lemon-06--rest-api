@@ -29,7 +29,7 @@ export const EpisodeCollectionContainer: React.FC = () => {
     setEpisodeCollection(newCollection);
   };
 
-  const searchEpisodeCollection = async (search: string): Promise<void> => {
+  const filterEpisodeCollection = async (search: string): Promise<void> => {
     try {
       const { episodes } = await graphQLClient.request<
         FilterEpisodeCollectionResponse
@@ -48,7 +48,7 @@ export const EpisodeCollectionContainer: React.FC = () => {
   return (
     <EpisodeCollectionComponent
       episodeCollection={episodeCollection}
-      handleOnSearch={searchEpisodeCollection}
+      handleOnSearch={filterEpisodeCollection}
       currentPage={currentPage}
       setCurrentPage={setCurrentPage}
       lastPage={lastPage}

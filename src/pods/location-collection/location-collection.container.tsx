@@ -29,7 +29,7 @@ export const LocationCollectionContainer: React.FC = () => {
     setLocationCollection(newCollection);
   };
 
-  const searchLocationCollection = async (search: string): Promise<void> => {
+  const filterLocationCollection = async (search: string): Promise<void> => {
     try {
       const { locations } = await graphQLClient.request<
         FilterLocationCollectionResponse
@@ -48,7 +48,7 @@ export const LocationCollectionContainer: React.FC = () => {
   return (
     <LocationCollectionComponent
       locationCollection={locationCollection}
-      handleOnSearch={searchLocationCollection}
+      handleOnSearch={filterLocationCollection}
       currentPage={currentPage}
       setCurrentPage={setCurrentPage}
       lastPage={lastPage}

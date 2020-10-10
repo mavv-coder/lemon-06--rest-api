@@ -29,7 +29,7 @@ export const CharacterCollectionContainer: React.FC = () => {
     setCharacterCollection(newCollection);
   };
 
-  const searchCharacterCollection = async (search: string): Promise<void> => {
+  const filterCharacterCollection = async (search: string): Promise<void> => {
     try {
       const { characters } = await graphQLClient.request<
         FilterCharacterCollectionResponse
@@ -50,7 +50,7 @@ export const CharacterCollectionContainer: React.FC = () => {
   return (
     <CharacterCollectionComponent
       characterCollection={characterCollection}
-      handleOnSearch={searchCharacterCollection}
+      handleOnSearch={filterCharacterCollection}
       currentPage={currentPage}
       setCurrentPage={setCurrentPage}
       lastPage={lastPage}
