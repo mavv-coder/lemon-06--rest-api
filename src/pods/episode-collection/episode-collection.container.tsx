@@ -9,7 +9,7 @@ import { mapEpisodeCollectionFromApiToVm } from './episode-collection.mapper';
 import { EpisodeCollectionComponent } from './episode-collection.component';
 import {
   episodeCollectionQuery,
-  filterCharacterQuery,
+  filterEpisodeQuery,
 } from './episode-collection.schema';
 
 export const EpisodeCollectionContainer: React.FC = () => {
@@ -27,14 +27,13 @@ export const EpisodeCollectionContainer: React.FC = () => {
     const newCollection = mapEpisodeCollectionFromApiToVm(episodes.results);
     setLastPage(episodes.info.pages);
     setEpisodeCollection(newCollection);
-    console.log(newCollection);
   };
 
   const searchEpisodeCollection = async (search: string): Promise<void> => {
     try {
       const { episodes } = await graphQLClient.request<
         FilterEpisodeCollectionResponse
-      >(filterCharacterQuery(search));
+      >(filterEpisodeQuery(search));
       const newCollection = mapEpisodeCollectionFromApiToVm(episodes.results);
       setEpisodeCollection(newCollection);
     } catch {

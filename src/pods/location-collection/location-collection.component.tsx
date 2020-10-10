@@ -5,7 +5,7 @@ import { SearchFilterComponent } from 'common/components/search-filter/search-fi
 import { PaginationComponent } from 'common/components/pagination/pagination.component';
 import { NoResultsComponent } from 'common/components/no-results/no-results.component';
 import { ListItemComponent } from '../../common/components/list-item/list-item.component';
-import { LocationVm } from './location-collection.vm';
+import { LocationVm } from './location-collection.models';
 import * as classes from './location-collection.styles';
 
 interface Props {

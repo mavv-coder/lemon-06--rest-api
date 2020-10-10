@@ -20,7 +20,7 @@ export const episodeCollectionQuery = (page: number): string => {
   `;
 };
 
-export const filterCharacterQuery = (search: string): string => {
+export const filterEpisodeQuery = (search: string): string => {
   return gql`
   query {
     episodes(filter: { name: "${search}" }) {

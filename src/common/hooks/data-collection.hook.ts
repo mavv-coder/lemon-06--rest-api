@@ -6,7 +6,7 @@ import { CharacterGql } from 'pods/character-detail/character-detail.models';
 import { EpisodeApi, LocationApi } from 'common/models';
 import { CharacterVm } from 'pods/character-collection/character-collection.models';
 import { EpisodeVm } from 'pods/episode-collection/episode-collection.models';
-import { LocationVm } from 'pods/location-collection/location-collection.vm';
+import { LocationVm } from 'pods/location-collection/location-collection.models';
 
 type ApiData = CharacterGql[] | EpisodeApi[] | LocationApi[];
 type VmData = CharacterVm[] | EpisodeVm[] | LocationVm[];

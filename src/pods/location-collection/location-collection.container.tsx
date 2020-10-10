@@ -1,35 +1,58 @@
 import React from 'react';
-import { LocationVm } from './location-collection.vm';
+import { graphQLClient } from 'core/api/graphql.client';
+import {
+  LocationVm,
+  GetLocationCollectionResponse,
+  FilterLocationCollectionResponse,
+} from './location-collection.models';
 import { mapLocationCollectionFromApiToVm } from './location-collection.mapper';
 import { LocationCollectionComponent } from './location-collection.component';
-import { useDataCollection } from 'common/hooks';
+import {
+  locationCollectionQuery,
+  filterLocationQuery,
+} from './location-collection.schema';
 
 export const LocationCollectionContainer: React.FC = () => {
-  const {
-    getDataCollection,
-    searchDataCollection,
-    currentPage,
-    setCurrentPage,
-    lastPage,
-    dataCollection,
-    currentPageRef,
-  } = useDataCollection(
-    mapLocationCollectionFromApiToVm,
-    process.env.API_LOCATIONS_URL
-  );
+  const [currentPage, setCurrentPage] = React.useState<number>(1);
+  const [lastPage, setLastPage] = React.useState<number>(0);
+  const [locationCollection, setLocationCollection] = React.useState<
+    LocationVm[]
+  >([]);
+  const currentPageRef = React.useRef(currentPage);
+
+  const getLocationCollection = async (): Promise<void> => {
+    const { locations } = await graphQLClient.request<
+      GetLocationCollectionResponse
+    >(locationCollectionQuery(currentPageRef.current));
+    const newCollection = mapLocationCollectionFromApiToVm(locations.results);
+    setLastPage(locations.info.pages);
+    setLocationCollection(newCollection);
+  };
+
+  const searchLocationCollection = async (search: string): Promise<void> => {
+    try {
+      const { locations } = await graphQLClient.request<
+        FilterLocationCollectionResponse
+      >(filterLocationQuery(search));
+      const newCollection = mapLocationCollectionFromApiToVm(locations.results);
+      setLocationCollection(newCollection);
+    } catch {
+      setLocationCollection([]);
+    }
+  };
 
   React.useEffect(() => {
-    getDataCollection();
+    getLocationCollection();
   }, []);
 
   return (
     <LocationCollectionComponent
-      locationCollection={dataCollection as LocationVm[]}
-      handleOnSearch={searchDataCollection}
+      locationCollection={locationCollection}
+      handleOnSearch={searchLocationCollection}
       currentPage={currentPage}
       setCurrentPage={setCurrentPage}
       lastPage={lastPage}
-      getLocationCollection={getDataCollection}
+      getLocationCollection={getLocationCollection}
       currentPageRef={currentPageRef}
     />
   );

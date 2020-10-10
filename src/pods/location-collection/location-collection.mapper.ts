@@ -1,14 +1,14 @@
-import { LocationApi } from 'common/models';
-import { LocationVm } from './location-collection.vm';
+import { LocationGql, LocationVm } from './location-collection.models';
 
-const mapLocationFromApiToVm = (location: LocationApi): LocationVm => ({
-  id: location.id,
-  name: location.name,
-  type: location.type,
-  dimension: location.dimension,
-  residents: location.residents,
+const mapCharacterName = (list: { name: string }[]): string[] =>
+  list.map((el) => el.name);
+
+const mapLocationFromApiToVm = (location: LocationGql): LocationVm => ({
+  ...location,
+  id: parseInt(location.id),
+  residents: mapCharacterName(location.residents),
 });
 
 export const mapLocationCollectionFromApiToVm = (
-  collection: LocationApi[]
+  collection: LocationGql[]
 ): LocationVm[] => collection.map(mapLocationFromApiToVm);
