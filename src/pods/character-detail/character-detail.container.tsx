@@ -5,9 +5,13 @@ import { mapCharacterFromApiToVm } from './character-detail.mapper';
 import { CharacterDetailComponent } from './character-detail.component';
 import {
   CharacterVm,
+  GetCharacterResponse,
   createEmptyCharacter,
   Quote,
-} from './character-detail.vm';
+} from './character-detail.models';
+import { characterQuery } from './character-detail.schema';
+
+import { graphQLClient } from 'core/api/graphql.client';
 
 interface Params {
   id: string;
@@ -22,18 +26,16 @@ export const CharacterDetailContainer: React.FC = () => {
   );
 
   const checkIfQuoteExist = async (): Promise<boolean> => {
-    const resolve = await Axios.get('api/quotes');
-    return (
-      resolve.data.findIndex((el: Quote) => el.id === parseInt(params.id)) !==
-      -1
-    );
+    const { data } = await Axios.get('api/quotes');
+    return data.findIndex((el: Quote) => el.id === parseInt(params.id)) !== -1;
   };
 
   const getCharacter = async (): Promise<void> => {
-    const resolve = await Axios.get(
-      `${process.env.API_CHARACTERS_URL}${params.id}`
+    const { character } = await graphQLClient.request<GetCharacterResponse>(
+      characterQuery(params.id)
     );
-    const newCharacter: CharacterVm = mapCharacterFromApiToVm(resolve.data);
+    const newCharacter: CharacterVm = mapCharacterFromApiToVm(character);
+    console.log(newCharacter);
     setCharacter(newCharacter);
   };
 
