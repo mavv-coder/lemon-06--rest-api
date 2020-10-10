@@ -1,13 +1,10 @@
-import { CharacterApi } from 'common/models';
-import { CharacterVm } from './character-collection.vm';
+import { CharacterGql, CharacterVm } from './character-collection.models';
 
-const mapCharacterFromApiToVm = (character: CharacterApi): CharacterVm => ({
-  id: character.id,
-  name: character.name,
-  image: character.image,
-  species: character.species,
+const mapCharacterFromApiToVm = (character: CharacterGql): CharacterVm => ({
+  ...character,
+  id: parseInt(character.id),
 });
 
 export const mapCharacterCollectionFromApiToVm = (
-  collection: CharacterApi[]
+  collection: CharacterGql[]
 ): CharacterVm[] => collection.map(mapCharacterFromApiToVm);
