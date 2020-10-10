@@ -33,14 +33,3 @@ export interface Quote {
   id: number;
   quote: string;
 }
-
-export const createEmptyCharacter = (): CharacterVm => ({
-  id: 0,
-  name: '',
-  image: '',
-  species: '',
-  origin: '',
-  lastLocation: '',
-  gender: '',
-  status: '',
-});

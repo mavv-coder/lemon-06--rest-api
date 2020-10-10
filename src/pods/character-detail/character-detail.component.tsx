@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { switchRoutes } from 'core/router';
 import Button from '@material-ui/core/Button';
+import { LoaderComponent } from 'common/components/loader/loader.component';
 import { CharacterVm } from './character-detail.models';
 import { CardComponent } from './components/card.component';
 import { CardFooterComponent } from './components/card-footer.components';
@@ -33,17 +34,20 @@ export const CharacterDetailComponent: React.FC<Props> = (props) => {
           Go back
         </Button>
       </Link>
-      <article>
-        <CardComponent character={character} />
-        <CardFooterComponent
-          isEditMode={isEditMode}
-          setIsEditMode={setIsEditMode}
-          characterQuote={characterQuote}
-          setUpdatedQuote={setUpdatedQuote}
-          handleUpdate={handleUpdate}
-          characterId={character.id}
-        />
-      </article>
+      {!character && <LoaderComponent />}
+      {character && (
+        <article>
+          <CardComponent character={character} />
+          <CardFooterComponent
+            isEditMode={isEditMode}
+            setIsEditMode={setIsEditMode}
+            characterQuote={characterQuote}
+            setUpdatedQuote={setUpdatedQuote}
+            handleUpdate={handleUpdate}
+            characterId={character.id}
+          />
+        </article>
+      )}
     </main>
   );
 };

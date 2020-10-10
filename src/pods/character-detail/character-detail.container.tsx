@@ -8,7 +8,6 @@ import { characterQuery } from './character-detail.schema';
 import {
   CharacterVm,
   GetCharacterResponse,
-  createEmptyCharacter,
   Quote,
 } from './character-detail.models';
 
@@ -20,9 +19,7 @@ export const CharacterDetailContainer: React.FC = () => {
   const params: Params = useParams();
   const isQuoteRef = React.useRef<boolean>(false);
   const [characterQuote, setCharacterQuote] = React.useState<string>('');
-  const [character, setCharacter] = React.useState<CharacterVm>(
-    createEmptyCharacter()
-  );
+  const [character, setCharacter] = React.useState<CharacterVm>(undefined);
 
   const checkIfQuoteExist = async (): Promise<boolean> => {
     const { data } = await Axios.get('api/quotes');
