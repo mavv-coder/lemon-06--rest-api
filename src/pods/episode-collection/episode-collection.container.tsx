@@ -7,7 +7,7 @@ import { useDataCollection } from 'common/hooks';
 export const EpisodeCollectionContainer: React.FC = () => {
   const {
     getDataCollection,
-    searchDataCollection,
+    filterDataCollection,
     currentPage,
     setCurrentPage,
     lastPage,
@@ -25,7 +25,7 @@ export const EpisodeCollectionContainer: React.FC = () => {
   return (
     <EpisodeCollectionComponent
       episodeCollection={dataCollection as EpisodeVm[]}
-      handleOnSearch={searchDataCollection}
+      handleOnSearch={filterDataCollection}
       currentPage={currentPage}
       setCurrentPage={setCurrentPage}
       lastPage={lastPage}

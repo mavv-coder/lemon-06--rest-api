@@ -7,7 +7,7 @@ import { useDataCollection } from 'common/hooks';
 export const LocationCollectionContainer: React.FC = () => {
   const {
     getDataCollection,
-    searchDataCollection,
+    filterDataCollection,
     currentPage,
     setCurrentPage,
     lastPage,
@@ -25,7 +25,7 @@ export const LocationCollectionContainer: React.FC = () => {
   return (
     <LocationCollectionComponent
       locationCollection={dataCollection as LocationVm[]}
-      handleOnSearch={searchDataCollection}
+      handleOnSearch={filterDataCollection}
       currentPage={currentPage}
       setCurrentPage={setCurrentPage}
       lastPage={lastPage}

@@ -7,7 +7,7 @@ import { CharacterCollectionComponent } from './character-collection.component';
 export const CharacterCollectionContainer: React.FC = () => {
   const {
     getDataCollection,
-    searchDataCollection,
+    filterDataCollection,
     currentPage,
     setCurrentPage,
     lastPage,
@@ -25,7 +25,7 @@ export const CharacterCollectionContainer: React.FC = () => {
   return (
     <CharacterCollectionComponent
       characterCollection={dataCollection as CharacterVm[]}
-      handleOnSearch={searchDataCollection}
+      handleOnSearch={filterDataCollection}
       currentPage={currentPage}
       setCurrentPage={setCurrentPage}
       lastPage={lastPage}

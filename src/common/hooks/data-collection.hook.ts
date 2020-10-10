@@ -23,7 +23,7 @@ export const useDataCollection = (mapper: Mapper, url: string) => {
     setDataCollection(newCollection);
   };
 
-  const searchDataCollection = async (search: string): Promise<void> => {
+  const filterDataCollection = async (search: string): Promise<void> => {
     try {
       const { data } = await Axios.get(`${url}?name=${search}`);
       const newCollection = mapper(data.results);
@@ -35,7 +35,7 @@ export const useDataCollection = (mapper: Mapper, url: string) => {
 
   return {
     getDataCollection,
-    searchDataCollection,
+    filterDataCollection,
     currentPage,
     setCurrentPage,
     lastPage,
