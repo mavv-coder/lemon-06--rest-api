@@ -22,7 +22,7 @@ export const CharacterDetailContainer: React.FC = () => {
   );
 
   const checkIfQuoteExist = async (): Promise<boolean> => {
-    const { data } = await Axios.get('api/quotes');
+    const { data } = await Axios.get(process.env.API_QUOTES_URL);
     return data.findIndex((el: Quote) => el.id === parseInt(params.id)) !== -1;
   };
 

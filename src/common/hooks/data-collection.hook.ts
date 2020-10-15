@@ -14,7 +14,7 @@ export const useDataCollection = (mapper: Mapper, url: string) => {
   const [currentPage, setCurrentPage] = React.useState<number>(1);
   const [lastPage, setLastPage] = React.useState<number>(0);
   const [dataCollection, setDataCollection] = React.useState<VmData>([]);
-  const currentPageRef = React.useRef(currentPage);
+  const currentPageRef = React.useRef<number>(currentPage);
 
   const getDataCollection = async (): Promise<void> => {
     const { data } = await Axios.get(`${url}?page=${currentPageRef.current}`);
