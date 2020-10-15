@@ -69,8 +69,12 @@
       "quote": "Hahahahaha!"
     },
     {
-      "quote": "This chicken is delicious",
+      "quote": "I was joking",
       "id": 39
+    },
+    {
+      "id": 80,
+      "quote": "Do you wanna play with me?"
     }
   ]
 }

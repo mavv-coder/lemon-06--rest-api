@@ -52,7 +52,7 @@ export const CharacterDetailContainer: React.FC = () => {
     }
   };
 
-  const onUpdateQuote = async (id: number, quote: string): Promise<void> => {
+  const onUpdateQuote = (id: number, quote: string): void => {
     !isQuoteRef.current ? createQuote(id, quote) : updateQuote(id, quote);
     setCharacterQuote(quote);
   };
