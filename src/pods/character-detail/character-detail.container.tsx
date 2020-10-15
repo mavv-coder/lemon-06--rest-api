@@ -1,15 +1,10 @@
 import React from 'react';
 import Axios from 'axios';
-import { graphQLClient } from 'core/api/graphql.client';
 import { useParams } from 'react-router-dom';
 import { mapCharacterFromApiToVm } from './character-detail.mapper';
 import { CharacterDetailComponent } from './character-detail.component';
-import { characterQuery } from './character-detail.schema';
-import {
-  CharacterVm,
-  GetCharacterResponse,
-  Quote,
-} from './character-detail.models';
+import { CharacterVm, Quote } from './character-detail.vm';
+import { getCharacter } from './api';
 
 interface Params {
   id: string;
@@ -26,11 +21,9 @@ export const CharacterDetailContainer: React.FC = () => {
     return data.findIndex((el: Quote) => el.id === parseInt(params.id)) !== -1;
   };
 
-  const getCharacter = async (): Promise<void> => {
-    const { character } = await graphQLClient.request<GetCharacterResponse>(
-      characterQuery(params.id)
-    );
-    const newCharacter: CharacterVm = mapCharacterFromApiToVm(character);
+  const onLoadCharacter = async (): Promise<void> => {
+    const response = await getCharacter(params.id);
+    const newCharacter: CharacterVm = mapCharacterFromApiToVm(response);
     setCharacter(newCharacter);
   };
 
@@ -55,7 +48,7 @@ export const CharacterDetailContainer: React.FC = () => {
   const getAllData = async (): Promise<void> => {
     const isQuoteInApi = await checkIfQuoteExist();
     isQuoteRef.current = isQuoteInApi;
-    getCharacter();
+    onLoadCharacter();
     getCharacterQuote(isQuoteRef.current);
   };
 

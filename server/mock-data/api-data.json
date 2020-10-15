@@ -1,7 +1,7 @@
 {
   "quotes": [
     {
-      "quote": "I love science as much as I love beer",
+      "quote": "Science is great",
       "id": 1
     },
     {
@@ -63,6 +63,10 @@
     {
       "quote": "Are you serious?",
       "id": 3
+    },
+    {
+      "id": 42,
+      "quote": "Wow, how big is your head, dude?"
     }
   ]
 }

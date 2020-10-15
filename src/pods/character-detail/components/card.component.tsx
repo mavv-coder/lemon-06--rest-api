@@ -1,5 +1,5 @@
 import React from 'react';
-import { CharacterVm } from '../character-detail.models';
+import { CharacterVm } from '../character-detail.vm';
 import * as classes from './card.styles';
 
 interface Props {

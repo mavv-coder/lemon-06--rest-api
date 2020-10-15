@@ -1,7 +1,8 @@
-import { CharacterGql, CharacterVm } from './character-detail.models';
+import { CharacterApi } from './api';
+import { CharacterVm } from './character-detail.vm';
 
 export const mapCharacterFromApiToVm = (
-  character: CharacterGql
+  character: CharacterApi
 ): CharacterVm => ({
   ...character,
   id: parseInt(character.id),
