@@ -1,4 +1,4 @@
-import { EpisodeApi } from 'common/models';
+import { EpisodeApi } from './api';
 import { EpisodeVm } from './episode-collection.vm';
 
 const mapEpisodeFromApiToVm = (episode: EpisodeApi): EpisodeVm => ({
