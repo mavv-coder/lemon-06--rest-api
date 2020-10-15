@@ -1,16 +1,8 @@
 import React from 'react';
-import { graphQLClient } from 'core/api/graphql.client';
-import {
-  LocationVm,
-  GetLocationCollectionResponse,
-  FilterLocationCollectionResponse,
-} from './location-collection.models';
+import { LocationVm } from './location-collection.vm';
 import { mapLocationCollectionFromApiToVm } from './location-collection.mapper';
 import { LocationCollectionComponent } from './location-collection.component';
-import {
-  locationCollectionQuery,
-  filterLocationQuery,
-} from './location-collection.schema';
+import { getLocationCollection, filterLocation } from './api';
 
 export const LocationCollectionContainer: React.FC = () => {
   const [currentPage, setCurrentPage] = React.useState<number>(1);
@@ -20,21 +12,19 @@ export const LocationCollectionContainer: React.FC = () => {
   >([]);
   const currentPageRef = React.useRef(currentPage);
 
-  const getLocationCollection = async (): Promise<void> => {
-    const { locations } = await graphQLClient.request<
-      GetLocationCollectionResponse
-    >(locationCollectionQuery(currentPageRef.current));
-    const newCollection = mapLocationCollectionFromApiToVm(locations.results);
-    setLastPage(locations.info.pages);
+  const onLoadLocationCollection = async (): Promise<void> => {
+    const { results, info } = await getLocationCollection(
+      currentPageRef.current
+    );
+    const newCollection = mapLocationCollectionFromApiToVm(results);
+    setLastPage(info.pages);
     setLocationCollection(newCollection);
   };
 
   const filterLocationCollection = async (search: string): Promise<void> => {
     try {
-      const { locations } = await graphQLClient.request<
-        FilterLocationCollectionResponse
-      >(filterLocationQuery(search));
-      const newCollection = mapLocationCollectionFromApiToVm(locations.results);
+      const { results } = await filterLocation(search);
+      const newCollection = mapLocationCollectionFromApiToVm(results);
       setLocationCollection(newCollection);
     } catch {
       setLocationCollection([]);
@@ -42,7 +32,7 @@ export const LocationCollectionContainer: React.FC = () => {
   };
 
   React.useEffect(() => {
-    getLocationCollection();
+    onLoadLocationCollection();
   }, []);
 
   return (
@@ -52,7 +42,7 @@ export const LocationCollectionContainer: React.FC = () => {
       currentPage={currentPage}
       setCurrentPage={setCurrentPage}
       lastPage={lastPage}
-      getLocationCollection={getLocationCollection}
+      getLocationCollection={onLoadLocationCollection}
       currentPageRef={currentPageRef}
     />
   );

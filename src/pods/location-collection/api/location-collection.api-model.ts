@@ -1,4 +1,4 @@
-export interface LocationGql {
+export interface LocationApi {
   id: string;
   name: string;
   type: string;
@@ -14,13 +14,13 @@ type Info = {
   pages: number;
 };
 
-type LocationCollection = {
-  results: LocationGql[];
+export type LocationCollection = {
+  results: LocationApi[];
   info: Info;
 };
 
-type LocationFilter = {
-  results: LocationGql[];
+export type FilteredLocationCollection = {
+  results: LocationApi[];
 };
 
 export interface GetLocationCollectionResponse {
@@ -28,13 +28,5 @@ export interface GetLocationCollectionResponse {
 }
 
 export interface FilterLocationCollectionResponse {
-  locations: LocationFilter;
-}
-
-export interface LocationVm {
-  id: number;
-  name: string;
-  type: string;
-  dimension: string;
-  residents: string[];
+  locations: FilteredLocationCollection;
 }
