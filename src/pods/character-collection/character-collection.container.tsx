@@ -1,16 +1,8 @@
 import React from 'react';
-import { graphQLClient } from 'core/api/graphql.client';
 import { mapCharacterCollectionFromApiToVm } from './character-collection.mapper';
 import { CharacterCollectionComponent } from './character-collection.component';
-import {
-  CharacterVm,
-  GetCharacterCollectionResponse,
-  FilterCharacterCollectionResponse,
-} from './character-collection.models';
-import {
-  characterCollectionQuery,
-  filterCharacterQuery,
-} from './character-collection.schema';
+import { CharacterVm } from './character-collection.vm';
+import { getCharacterCollection, filterCharacter } from './api';
 
 export const CharacterCollectionContainer: React.FC = () => {
   const [currentPage, setCurrentPage] = React.useState<number>(1);
@@ -20,23 +12,19 @@ export const CharacterCollectionContainer: React.FC = () => {
   >([]);
   const currentPageRef = React.useRef(currentPage);
 
-  const getCharacterCollection = async (): Promise<void> => {
-    const { characters } = await graphQLClient.request<
-      GetCharacterCollectionResponse
-    >(characterCollectionQuery(currentPageRef.current));
-    const newCollection = mapCharacterCollectionFromApiToVm(characters.results);
-    setLastPage(characters.info.pages);
+  const onLoadCharacterCollection = async (): Promise<void> => {
+    const { results, info } = await getCharacterCollection(
+      currentPageRef.current
+    );
+    const newCollection = mapCharacterCollectionFromApiToVm(results);
+    setLastPage(info.pages);
     setCharacterCollection(newCollection);
   };
 
   const filterCharacterCollection = async (search: string): Promise<void> => {
     try {
-      const { characters } = await graphQLClient.request<
-        FilterCharacterCollectionResponse
-      >(filterCharacterQuery(search));
-      const newCollection = mapCharacterCollectionFromApiToVm(
-        characters.results
-      );
+      const { results } = await filterCharacter(search);
+      const newCollection = mapCharacterCollectionFromApiToVm(results);
       setCharacterCollection(newCollection);
     } catch {
       setCharacterCollection([]);
@@ -44,7 +32,7 @@ export const CharacterCollectionContainer: React.FC = () => {
   };
 
   React.useEffect(() => {
-    getCharacterCollection();
+    onLoadCharacterCollection();
   }, []);
 
   return (
@@ -54,7 +42,7 @@ export const CharacterCollectionContainer: React.FC = () => {
       currentPage={currentPage}
       setCurrentPage={setCurrentPage}
       lastPage={lastPage}
-      getCharacterCollection={getCharacterCollection}
+      getCharacterCollection={onLoadCharacterCollection}
       currentPageRef={currentPageRef}
     />
   );

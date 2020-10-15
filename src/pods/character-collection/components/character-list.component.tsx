@@ -7,7 +7,7 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
-import { CharacterVm } from '../character-collection.models';
+import { CharacterVm } from '../character-collection.vm';
 import * as classes from './character-list.styles';
 
 interface Props {
