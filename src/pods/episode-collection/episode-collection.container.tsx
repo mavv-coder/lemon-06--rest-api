@@ -1,16 +1,8 @@
 import React from 'react';
-import { graphQLClient } from 'core/api/graphql.client';
-import {
-  EpisodeVm,
-  GetEpisodeCollectionResponse,
-  FilterEpisodeCollectionResponse,
-} from './episode-collection.models';
+import { EpisodeVm } from './episode-collection.vm';
 import { mapEpisodeCollectionFromApiToVm } from './episode-collection.mapper';
 import { EpisodeCollectionComponent } from './episode-collection.component';
-import {
-  episodeCollectionQuery,
-  filterEpisodeQuery,
-} from './episode-collection.schema';
+import { getEpisodeCollection, filterEpisode } from './api';
 
 export const EpisodeCollectionContainer: React.FC = () => {
   const [currentPage, setCurrentPage] = React.useState<number>(1);
@@ -20,21 +12,19 @@ export const EpisodeCollectionContainer: React.FC = () => {
   );
   const currentPageRef = React.useRef(currentPage);
 
-  const getEpisodeCollection = async (): Promise<void> => {
-    const { episodes } = await graphQLClient.request<
-      GetEpisodeCollectionResponse
-    >(episodeCollectionQuery(currentPageRef.current));
-    const newCollection = mapEpisodeCollectionFromApiToVm(episodes.results);
-    setLastPage(episodes.info.pages);
+  const onLoadEpisodeCollection = async (): Promise<void> => {
+    const { results, info } = await getEpisodeCollection(
+      currentPageRef.current
+    );
+    const newCollection = mapEpisodeCollectionFromApiToVm(results);
+    setLastPage(info.pages);
     setEpisodeCollection(newCollection);
   };
 
   const filterEpisodeCollection = async (search: string): Promise<void> => {
     try {
-      const { episodes } = await graphQLClient.request<
-        FilterEpisodeCollectionResponse
-      >(filterEpisodeQuery(search));
-      const newCollection = mapEpisodeCollectionFromApiToVm(episodes.results);
+      const { results } = await filterEpisode(search);
+      const newCollection = mapEpisodeCollectionFromApiToVm(results);
       setEpisodeCollection(newCollection);
     } catch {
       setEpisodeCollection([]);
@@ -42,7 +32,7 @@ export const EpisodeCollectionContainer: React.FC = () => {
   };
 
   React.useEffect(() => {
-    getEpisodeCollection();
+    onLoadEpisodeCollection();
   }, []);
 
   return (
@@ -52,7 +42,7 @@ export const EpisodeCollectionContainer: React.FC = () => {
       currentPage={currentPage}
       setCurrentPage={setCurrentPage}
       lastPage={lastPage}
-      getEpisodeCollection={getEpisodeCollection}
+      getEpisodeCollection={onLoadEpisodeCollection}
       currentPageRef={currentPageRef}
     />
   );

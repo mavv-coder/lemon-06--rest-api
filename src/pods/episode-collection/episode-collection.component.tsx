@@ -5,7 +5,7 @@ import { SearchFilterComponent } from 'common/components/search-filter/search-fi
 import { PaginationComponent } from 'common/components/pagination/pagination.component';
 import { NoResultsComponent } from 'common/components/no-results/no-results.component';
 import { ListItemComponent } from '../../common/components/list-item/list-item.component';
-import { EpisodeVm } from './episode-collection.models';
+import { EpisodeVm } from './episode-collection.vm';
 import * as classes from './episode-collection.styles';
 
 interface Props {

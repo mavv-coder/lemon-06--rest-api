@@ -1,4 +1,4 @@
-export interface EpisodeGql {
+export interface EpisodeApi {
   id: string;
   name: string;
   episode: string;
@@ -13,13 +13,13 @@ type Info = {
   pages: number;
 };
 
-type EpisodeCollection = {
-  results: EpisodeGql[];
+export type EpisodeCollection = {
+  results: EpisodeApi[];
   info: Info;
 };
 
-type EpisodeFilter = {
-  results: EpisodeGql[];
+export type FilteredEpisodeCollection = {
+  results: EpisodeApi[];
 };
 
 export interface GetEpisodeCollectionResponse {
@@ -27,12 +27,5 @@ export interface GetEpisodeCollectionResponse {
 }
 
 export interface FilterEpisodeCollectionResponse {
-  episodes: EpisodeFilter;
-}
-
-export interface EpisodeVm {
-  id: number;
-  name: string;
-  episode: string;
-  characters: string[];
+  episodes: FilteredEpisodeCollection;
 }
