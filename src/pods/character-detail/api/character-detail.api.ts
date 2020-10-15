@@ -16,12 +16,20 @@ export const getQuote = async (id: string): Promise<Quote> => {
   return data;
 };
 
-export const updateQuote = (id: number, quote: string): void => {
-  Axios.put(`${process.env.API_QUOTES_URL}${id}`, {
+export const updateQuote = async (
+  id: number,
+  quote: string
+): Promise<boolean> => {
+  await Axios.put(`${process.env.API_QUOTES_URL}${id}`, {
     quote: quote,
   });
+  return true;
 };
 
-export const createQuote = (id: number, quote: string): void => {
-  Axios.post(process.env.API_QUOTES_URL, { id, quote });
+export const createQuote = async (
+  id: number,
+  quote: string
+): Promise<boolean> => {
+  await Axios.post(process.env.API_QUOTES_URL, { id, quote });
+  return true;
 };
