@@ -1,4 +1,3 @@
-import Axios from 'axios';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { mapCharacterFromApiToVm } from './character-detail.mapper';
@@ -8,6 +7,13 @@ import {
   createEmptyCharacter,
   Quote,
 } from './character-detail.vm';
+import {
+  getCharacter,
+  getQuote,
+  getQuoteCollection,
+  createQuote,
+  updateQuote,
+} from './api';
 
 interface Params {
   id: string;
@@ -22,42 +28,39 @@ export const CharacterDetailContainer: React.FC = () => {
   );
 
   const checkIfQuoteExist = async (): Promise<boolean> => {
-    const { data } = await Axios.get('api/quotes');
-    return data.findIndex((el: Quote) => el.id === parseInt(params.id)) !== -1;
+    const quoteCollection = await getQuoteCollection();
+    return (
+      quoteCollection.findIndex(
+        (el: Quote) => el.id === parseInt(params.id)
+      ) !== -1
+    );
   };
 
-  const getCharacter = async (): Promise<void> => {
-    const { data } = await Axios.get(
-      `${process.env.API_CHARACTERS_URL}${params.id}`
-    );
-    const newCharacter: CharacterVm = mapCharacterFromApiToVm(data);
+  const onLoadCharacter = async (): Promise<void> => {
+    const character = await getCharacter(params.id);
+    const newCharacter: CharacterVm = mapCharacterFromApiToVm(character);
     setCharacter(newCharacter);
+    console.log(newCharacter);
   };
 
   const getCharacterQuote = async (isQuote: boolean): Promise<void> => {
     if (isQuote) {
-      const { data } = await Axios.get(
-        `${process.env.API_QUOTES_URL}${params.id}`
-      );
-      data.quote === undefined
+      const response = await getQuote(params.id);
+      response.quote === undefined
         ? setCharacterQuote('')
-        : setCharacterQuote(data.quote);
+        : setCharacterQuote(response.quote);
     }
   };
 
-  const updateQuote = async (id: number, quote: string): Promise<void> => {
-    !isQuoteRef.current
-      ? Axios.post(process.env.API_QUOTES_URL, { id, quote: quote })
-      : Axios.put(`${process.env.API_QUOTES_URL}${id}`, {
-          quote: quote,
-        });
+  const onUpdateQuote = async (id: number, quote: string): Promise<void> => {
+    !isQuoteRef.current ? createQuote(id, quote) : updateQuote(id, quote);
     setCharacterQuote(quote);
   };
 
   const getAllData = async (): Promise<void> => {
     const isQuoteInApi = await checkIfQuoteExist();
     isQuoteRef.current = isQuoteInApi;
-    getCharacter();
+    onLoadCharacter();
     getCharacterQuote(isQuoteRef.current);
   };
 
@@ -68,7 +71,7 @@ export const CharacterDetailContainer: React.FC = () => {
   return (
     <CharacterDetailComponent
       character={character}
-      onUpdate={updateQuote}
+      onUpdate={onUpdateQuote}
       characterQuote={characterQuote}
     />
   );
