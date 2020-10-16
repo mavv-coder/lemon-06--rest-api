@@ -25,6 +25,7 @@ export const ListItemComponent: React.FC<Props> = (props) => {
     setDisplayInnerList(v);
   };
 
+  // I had to impletent this because the api returns some repeated characters
   const generateKey = () => (Math.random() * 1000).toString();
 
   return (
