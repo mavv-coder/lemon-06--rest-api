@@ -1,4 +1,3 @@
-import Axios from 'axios';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { mapCharacterFromApiToVm } from './character-detail.mapper';
@@ -8,6 +7,13 @@ import {
   createEmptyCharacter,
   Quote,
 } from './character-detail.vm';
+import {
+  getCharacter,
+  getQuote,
+  getQuoteCollection,
+  createQuote,
+  updateQuote,
+} from './api';
 
 interface Params {
   id: string;
