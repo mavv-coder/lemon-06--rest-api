@@ -40,7 +40,6 @@ export const CharacterDetailContainer: React.FC = () => {
     const character = await getCharacter(params.id);
     const newCharacter: CharacterVm = mapCharacterFromApiToVm(character);
     setCharacter(newCharacter);
-    console.log(newCharacter);
   };
 
   const getCharacterQuote = async (isQuote: boolean): Promise<void> => {
